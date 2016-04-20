@@ -24,13 +24,14 @@ class TopicsController < ApplicationController
 
 	def create
 		@topic = Topic.new(topic_params)
+
 		if @topic.save
 			flash[:success] = "Tópico criado com sucesso"
-			return redirect_to @topic
-		end
+			return redirect_to (@topic)
 		else
       #nothing to do
     end
+    
 	end
 
   # name: show
