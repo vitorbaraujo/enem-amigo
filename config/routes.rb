@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   get 'battles/ranking' => 'battles#ranking'
 
   get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
+  post 'login' => 'sessions#log_user_in'
+  delete 'logout' => 'sessions#log_user_out'
 
   get 'questions' => 'questions#category'
   get 'questions/all' => 'questions#index'
