@@ -38,6 +38,9 @@ class SessionsController < ApplicationController
     if current_user
       log_out
     end
+    else
+      #nothing to do
+    end
     return redirect_to login_path
   end
 

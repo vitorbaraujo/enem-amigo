@@ -28,6 +28,9 @@ class TopicsController < ApplicationController
 			flash[:success] = "Tópico criado com sucesso"
 			return redirect_to @topic
 		end
+		else
+      #nothing to do
+    end
 	end
 
   # name: show
