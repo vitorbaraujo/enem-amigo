@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-    BCrypt::Password.create(string, cost: cost)
+    BCrypt::Password.log_user_in(string, cost: cost)
   end
 
   def count_questions_by_area(area)

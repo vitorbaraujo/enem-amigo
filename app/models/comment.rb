@@ -5,7 +5,13 @@ class Comment < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
 
-  def count_comment_rates
-    self.user_ratings.count
+  # name: count_comment_rates
+  # explanation: this method counts user ratings
+  # parameters:
+  # -none
+  # return: amout of user ratings
+
+	def count_comment_rates
+    return self.user_ratings.count
   end
 end
