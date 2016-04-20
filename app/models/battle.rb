@@ -11,12 +11,22 @@ class Battle < ActiveRecord::Base
 
   validates :player_2, presence: true
 
+  EMPTY_STRING = ""
+
   def generate_questions
-    self.questions = self.category == "" ? Question.all.sample(10) : Question.where(area: self.category).sample(10)
+    if self.category == EMPTY_STRING
+      self.questions = Question.all
+      return self.questions.sample(10)
+    else
+      self.questions = Question.where(area: self.category)
+      return self.questions.sample(10)
+    end
   end
 
   def all_played?
-    self.player_1_start and self.player_2_start
+    both_players_started = self.player_1_start and self.player_2_start
+    return both_players_started
   end
 
 end
+
