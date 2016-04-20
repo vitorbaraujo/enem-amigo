@@ -4,17 +4,36 @@ class ExamsController < ApplicationController
 
   before_action :authenticate_user
 
+ # name: select_exam
+ # explanation: this method  associate select_exam view with this controller
+ # parameters:
+ # -none
+ # return: 
   def select_exam
   end
 
+ # name: exams_statistics
+ # explanation: this method  associate exams_statistics view with this controller
+ # parameters:
+ # -none
+ # return: 
   def exams_statistics
   end
 
+ # name: answer_exam
+ # explanation: this method 
+ # parameters:
+ # -none
+ # return: questions
   def answer_exam
-    questions = params[:year_exam] ? Question.where(year: params[:year_exam]) : Question.all
+    if params[:year_exam] 
+      questions ||= Question.where(year: params[:year_exam])
+    else
+      questions ||= Question.all
+    end
 
     if !questions.empty?
-      auxiliar_exam = push_questions_auxiliar(questions)
+      auxiliar_exam ||= push_questions_auxiliar(questions)
       @exam = push_questions(auxiliar_exam)
     else
       redirect_to_back(select_exam_path)
@@ -26,6 +45,11 @@ class ExamsController < ApplicationController
     end
   end
 
+ # name: exam_result
+ # explanation: this method list result of the exam
+ # parameters:
+ # -none
+ # return: @exam.user_answers
   def exam_result
     if params[:exam_id]
       @exam = Exam.find(params[:exam_id])
@@ -35,17 +59,22 @@ class ExamsController < ApplicationController
       current_user.update_attribute(:exam_performance, current_user.exam_performance + [@exam.accepted_answers])
 
       @exam.save
-      @exam.user_answers
+      return @exam.user_answers
     else
-      redirect_to_back
+      return redirect_to_back
       flash[:danger] = "Você deve responder uma prova antes para obter seu resultado."
     end
   end
 
+ # name: cancel_exam
+ # explanation: this method cancel of exam
+ # parameters:
+ # -none
+ # return:redirect_to root_path
   def cancel_exam
-    exam = Exam.find(params[:exam_id])
+    exam |\= Exam.find(params[:exam_id])
     exam.destroy
-    redirect_to root_path
+    return redirect_to root_path
   end
 
 end
