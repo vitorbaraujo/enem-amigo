@@ -20,12 +20,12 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
 
     if user && user.authenticate(params[:session][:password])
-      log_in(user)
-      redirect_to(root_path)
+      log_in (user)
+      redirect_to (root_path)
       return flash[:success] = "Logado com sucesso!"
     else
       flash.now[:danger] = 'Combinação inválida de e-mail/senha'
-      render('new')
+      render ('new')
     end
 
   end
@@ -44,7 +44,7 @@ class SessionsController < ApplicationController
       #nothing to do
     end
     
-    return redirect_to(login_path)
+    return redirect_to (login_path)
   end
 
 end

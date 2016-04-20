@@ -23,13 +23,14 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
     @comment.post_id = params[:post_id]
+
     if @comment.save
       flash[:success] = "Seu comentário foi criado com sucesso"
-      return redirect_to(Topic.find(session[:topic_id]))
+      return redirect_to (Topic.find(session[:topic_id]))
     else
-      return redirect_to(new_post_comment_path(params[:post_id]))
+      return redirect_to (new_post_comment_path(params[:post_id]))
     end
-  end
+    end
 
   # name: edit
   # explanation: find comment to update
@@ -49,12 +50,14 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:comment_id])
+
     if @comment.update_attributes(comment_params)
       flash[:success] = "Seu comentário foi atualizado com sucesso"
-      return redirect_to(Topic.find(session[:topic_id]))
+      return redirect_to (Topic.find(session[:topic_id]))
     else
-      return redirect_to(edit_post_comment_path(session[:topic_id]))
+      return redirect_to (edit_post_comment_path(session[:topic_id]))
     end
+
   end
 
   # name: rate_comment
@@ -66,12 +69,14 @@ class CommentsController < ApplicationController
   def rate_comment
     render nothing: true
     comment = Comment.find(params[:id])
+
     if !(comment.user_ratings.include? current_user.id)
       comment.user_ratings.push(current_user.id)
       return comment.save
     else
-      return redirect_to_back(root_path)
+      return redirect_to_back (root_path)
     end
+
   end
 
   # name: destroy
@@ -84,7 +89,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:comment_id])
     @comment.destroy
     flash[:success] = "Comentário deletado com sucesso"
-    return redirect_to Topic.find(session[:topic_id]))
+    return redirect_to (Topic.find(session[:topic_id]))
   end
 
   # name: show
