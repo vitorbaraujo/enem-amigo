@@ -6,23 +6,28 @@ class UsersController < ApplicationController
   def new
     @home_page = true
     @user = User.new
-    redirect_to current_user if logged_in?
+
+    if logged_in?
+        return redirect_to(current_user)
+    else
+    end
+    # nothing to do
   end
 
   def edit
-    @user = User.find(params[:id])
+    return @user = User.find(params[:id])
   end
 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
     flash[:success] = "Usuário foi deletado"
-    redirect_to users_path
+    return redirect_to(users_path)
   end
 
   def show
     @user = User.find(params[:id])
-    find_level current_user.points
+    return find_level(current_user.points)
   end
 
   def create
@@ -30,12 +35,12 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = "Usuário criado com sucesso!"
-      log_in @user
+      log_in(@user)
       first_notification
-      redirect_to root_path
+      return redirect_to(root_path)
     else
       @home_page = true
-      render 'new'
+      return render('new')
     end
   end
 
@@ -43,29 +48,33 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success]= "Usuário atualizado"
-      redirect_to @user
+      return redirect_to(@user)
     else
-      render 'edit'
+      return render('edit')
     end
   end
 
   def index
-    @users = User.all
+    return @users = User.all
   end
 
   def ranking
-    @home_page = true unless logged_in?
-    @users = User.order(:points).reverse
+    if !logged_in?
+      @home_page = true
+    else
+      # nothing to do
+    end
+      return @users = User.order(:points).reverse
   end
 
   def delete_profile_image
-    unless current_user.profile_image_file_name.empty?
+    if !current_user.profile_image_file_name.empty?
       current_user.update_attribute(:profile_image_file_name,"")
       flash[:success] = "Foto de perfil removida com sucesso!"
     else
       flash[:danger] = "Não há foto de perfil para ser removida."
     end
-    redirect_to user_path(current_user.id)
+    return redirect_to user_path(current_user.id)
   end
 
   private
