@@ -4,4 +4,5 @@ class Topic < ActiveRecord::Base
 	validates :description, presence: true, uniqueness: true
 
 	has_many :posts
+	
 end
