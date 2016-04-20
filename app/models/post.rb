@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
   belongs_to :user
 
   def count_post_rates
-    self.user_ratings.count
+    return self.user_ratings.count
   end
+
 end
+
