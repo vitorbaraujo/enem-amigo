@@ -18,7 +18,6 @@ class SessionsController < ApplicationController
 
   def log_user_in
     user = User.find_by(email: params[:session][:email].downcase)
-
     if user && user.authenticate(params[:session][:password])
       log_in(user)
       redirect_to(root_path)
@@ -27,7 +26,6 @@ class SessionsController < ApplicationController
       flash.now[:danger] = 'Combinação inválida de e-mail/senha'
       render('new')
     end
-
   end
 
   # name: log_user_out
@@ -37,13 +35,11 @@ class SessionsController < ApplicationController
   # return: login_path
 
   def log_user_out
-
     if current_user
       log_out
     else
       #nothing to do
     end
-    
     return redirect_to(login_path)
   end
 

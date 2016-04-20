@@ -72,6 +72,7 @@ class CommentsController < ApplicationController
     else
       return redirect_to_back(root_path)
     end
+
   end
 
   # name: destroy
@@ -84,7 +85,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:comment_id])
     @comment.destroy
     flash[:success] = "Comentário deletado com sucesso"
-    return redirect_to Topic.find(session[:topic_id]))
+    return redirect_to(Topic.find(session[:topic_id])))
   end
 
   # name: show

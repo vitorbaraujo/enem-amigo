@@ -30,7 +30,8 @@ class TopicsController < ApplicationController
 		else
       #nothing to do
     end
-	end
+		return redirect_to (@topic)
+  end
 
   # name: show
   # explanation: show a topic
