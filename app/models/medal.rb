@@ -6,12 +6,12 @@ class Medal < ActiveRecord::Base
   serialize :message_instructions, Array
 
   validates :name, presence: true
-  validates :description, presence: true
+  validates :deion, presence: true
   validates :image, presence: true
   validates :achieved_instructions, presence: true
   validates :message_instructions, presence: true
-
   validate :instructions_work
+
 
   private
 
@@ -20,22 +20,34 @@ class Medal < ActiveRecord::Base
     current_user.restore_attributes
 
     achieved_return = achieved?(current_user)
-    errors.add(:achieved_instructions, "Changing user information") if current_user.changed?
+    if current_user.changed?
+      errors.add(:achieved_instructions, "Changing user information")
+    else
+      # nothing to do
+    end
     current_user.restore_attributes
 
     message_return = message(current_user)
-    errors.add(:message_instructions, "Changing user information") if current_user.changed?
+    if current_user.changed?
+      errors.add(:message_instructions, "Changing user information")
+    else
+      # nothing to do
+    end
 
-    instructions_return_valid_class(achieved_return, message_return)
+    return instructions_return_valid_class(achieved_return, message_return)
   end
 
   def instructions_return_valid_class(achieved_return, message_return)
     if (achieved_return.class != TrueClass and achieved_return.class != FalseClass)
       errors.add(:achieved_instructions, "Achieved must be True or False")
+    else
+      # nothing to do
     end
 
     if message_return.class != String
       errors.add(:message_instructions, "Message must be String")
+    else
+      # nothing to do
     end
   end
 
@@ -52,6 +64,7 @@ class Medal < ActiveRecord::Base
     message_instructions.each do |instruction|
       eval instruction
     end
+
     rescue
       errors.add(:message_instructions, "Invalid instructions")
   end
