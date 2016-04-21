@@ -4,7 +4,7 @@ class StaticPagesController < ApplicationController
 
   def home
     check_medals
-    find_level current_user.points
+    return find_level(current_user.points)
   end
 
   def about
@@ -14,8 +14,12 @@ class StaticPagesController < ApplicationController
   end
 
   def server_error
-    redirect_to_back(root_path) unless session[:exception]
-    session.delete(:exception)
+    if !session[:exception]
+      redirect_to_back(root_path)
+    else
+      # do nothing
+    end
+    return session.delete(:exception)
   end
 
 end

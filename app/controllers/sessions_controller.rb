@@ -10,38 +10,37 @@ class SessionsController < ApplicationController
     return @home_page = true
   end
 
-  # name: create
+  # name: log_user_in
   # explanation: log in 
   # parameters:
   # -none
-  # return: message of sucess or error
+  # return: message of sucess or render new
 
-  def create
+  def log_user_in
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      log_in user
-      redirect_to root_path
+      log_in(user)
+      redirect_to(root_path)
       return flash[:success] = "Logado com sucesso!"
     else
-      return flash.now[:danger] = 'Combinação inválida de e-mail/senha'
-      render 'new'
+      flash.now[:danger] = 'Combinação inválida de e-mail/senha'
+      render('new')
     end
   end
 
-  # name: destroy
+  # name: log_user_out
   # explanation: log out
   # parameters:
   # -none
   # return: login_path
 
-  def destroy
+  def log_user_out
     if current_user
       log_out
-    end
     else
       #nothing to do
     end
-    return redirect_to login_path
+    return redirect_to(login_path)
   end
 
 end
