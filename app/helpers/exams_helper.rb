@@ -1,32 +1,66 @@
 module ExamsHelper
 
+  BLANK_STRING = ""
+
   def fill_user_answers exam
     exam.questions.each do |t|
       question = Question.find(t)
-      user_answer = params[:"alternative_#{question.id}"] ? params[:"alternative_#{question.id}"] : "não marcou"
+
+      question_alternative = params[:"alternative_#{question.id}"]
+      user_answer = BLANK_STRING
+
+      if question_alternative
+        user_answer = question_alternative
+      else
+        user_answer = "nao marcou"
+      end
+
       exam.user_answers.push(user_answer)
-      if(user_answer == question.right_answer)
-        exam.accepted_answers += 1
+
+      if user_answer == question.right_answer
+        exam.accepted_answers = exam.accepted_answers + 1
+      else
+        # nothing to do
       end
     end
-    exam
+
+    return exam
   end
 
-  def push_questions_auxiliar questions
-    @math_questions = questions.where(area: "matemática e suas tecnologias")
-    @humans_questions = questions.where(area: "ciências humanas e suas tecnologias")
-    @language_questions = questions.where(area: "linguagens, códigos e suas tecnologias")
-    @nature_questions = questions.where(area: "ciências da natureza e suas tecnologias")
+  def push_questions_auxiliar(questions)
+    MATH_AREA = "matemática e suas tecnologias"
+    SCIENCE_AREA = "ciências humanas e suas tecnologias"
+    LANGUAGES_AREA = "linguagens, códigos e suas tecnologias"
+    NATURE_AREA = "ciências da natureza e suas tecnologias"
+
+    @humans_questions = questions.where(area: SCIENCE_AREA)
+    @math_questions = questions.where(area: MATH_AREA)
+    @language_questions = questions.where(area: LANGUAGES_AREA)
+    @nature_questions = questions.where(area: NATURE_AREA)
 
     auxiliar_exam = Exam.new
-    auxiliar_exam.questions.push((0...@humans_questions.count).to_a.sample 22)
-    auxiliar_exam.questions.push((0...@math_questions.count).to_a.sample 22)
-    auxiliar_exam.questions.push((0...@language_questions.count).to_a.sample 23)
-    auxiliar_exam.questions.push((0...@nature_questions.count).to_a.sample 23)
-    auxiliar_exam
+
+    set_humans_questions = ((0...@humans_questions.count).to_a)
+    set_humans_questions = set_humans_questions.sample(22)
+
+    set_math_questions = ((0...@math_questions.count).to_a)
+    set_math_questions = set_math_questions.sample(22)
+
+    set_language_questions = ((0...@language_questions.count).to_a)
+    set_language_questions = set_language_questions.sample(23)
+
+    set_nature_questions = ((0...@nature_questions.count).to_a)
+    set_nature_questions = set_nature_questions.sample(23)
+
+    auxiliar_exam.questions.push(set_humans_questions)
+    auxiliar_exam.questions.push(set_math_questions)
+    auxiliar_exam.questions.push(set_language_questions)
+    auxiliar_exam.questions.push(set_nature_questions)
+
+    return auxiliar_exam
   end
 
-  def push_questions auxiliar_exam
+  def push_questions(auxiliar_exam)
     @exam = Exam.new
 
     for i in 0...4
@@ -39,6 +73,8 @@ module ExamsHelper
           single_question = @language_questions[a]
         elsif i == 3
           single_question = @nature_questions[a]
+        else
+          # nothing to do
         end
 
         @exam.questions.push(single_question.id)
@@ -47,7 +83,9 @@ module ExamsHelper
     end
 
     @exam.save
-    @exam
+
+    return @exam
   end
 
 end
+
