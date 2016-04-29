@@ -31,6 +31,15 @@ class ApplicationController < ActionController::Base
 
       flash[:danger] = "#{resource.singularize == 'question' ? 'Questão não encontrada' : 'Usuário não encontrado'}"
     end
+
+    def assert(condition)
+      if(condition)
+        # nothing to do
+      else
+        server_exception
+      end
+    end
+    
   end
 
 end
