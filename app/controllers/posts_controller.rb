@@ -5,12 +5,15 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+
+    return @post
   end
 
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.topic_id = session[:topic_id]
+
     if @post.save
       flash[:success] = "Postagem criada com sucesso"
       redirect_to Topic.find(session[:topic_id])
@@ -21,18 +24,25 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+
+    return @post
   end
 
   def index
     @posts = Post.all
+
+    return @posts
   end
 
   def edit
     @post = Post.find(params[:post_id])
+
+    return @post
   end
 
   def update
     @post = Post.find(params[:post_id])
+
     if @post.update_attributes(post_params)
       flash[:success] = "Seu post foi atualizado com sucesso"
       redirect_to Topic.find(session[:topic_id])
@@ -43,6 +53,8 @@ class PostsController < ApplicationController
 
   def user_name(user_id)
     user = User.where(id: user_id).name
+
+    return user
   end
 
   def rate_post
@@ -60,6 +72,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:post_id])
     @post.destroy
+
     flash[:success] = "Post deletado com sucesso"
     redirect_to Topic.find(session[:topic_id])
   end
@@ -70,3 +83,4 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content)
   end
 end
+

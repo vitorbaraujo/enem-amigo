@@ -1,6 +1,7 @@
 module BattlesHelper
 
   INICIAL_BATTLE_ANSWERS = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
+  WIN_POINTS_BATTLE = 25
 
   def player_started?(battle)
     if is_player_1?(battle)
@@ -59,8 +60,6 @@ module BattlesHelper
     p1_has_more_points = @player_1_points > @player_2_points
     players_same_points = @player_1_points == @player_2_points
     p1_has_less_time = battle.player_1_time <= battle.player_2_time
-
-    WIN_POINTS_BATTLE = 25
 
     if(p1_has_more_points || (players_same_points && p1_has_less_time))
       battle.update_attribute(:winner, player_1)

@@ -7,14 +7,21 @@ class BattlesController < ApplicationController
   before_action :verify_all_played, only: [:result]
   before_action :verify_current_user_played, only: [:finish]
 
+  EMPTY_ARRAY = []
+
   def new
     @battle = Battle.new
+
+    return @battle
   end
 
   def create
-    @battle = Battle.new(player_1: current_user, player_2: User.where(nickname: params[:player_2_nickname]).first)
+    player_2_user = User.where(nickname: params[:player_2_nickname]).first
+
+    @battle = Battle.new(player_1: current_user, player_2: player_2_user)
     @battle.category = params[:battle][:category]
     @battle.generate_questions
+
     if @battle.save
       new_battle_notification(@battle)
 
@@ -28,17 +35,30 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
+
     start_battle(@battle)
-    battle_answer_notification(@battle, true) unless is_player_1?(@battle)
-    @adversary = is_player_1?(@battle) ? @battle.player_2 : @battle.player_1
-    @question = @battle.questions[0]
+
+    if is_player_1(@battle)
+      # nothing to do
+    else
+      battle_answer_notification(@battle, true)
+    end
+
+    if is_player_1?(@battle)
+      @adversary = @battle.player_2
+    else
+      @adversary = @battle.player_1
+    end
+
+    @question = @battle.questions.first
   end
 
   def index
-    @pending_battles = []
-    @waiting_battles = []
-    @finished_battles = []
+    @pending_battles = EMPTY_ARRAY
+    @waiting_battles = EMPTY_ARRAY
+    @finished_battles = EMPTY_ARRAY
     @battles = current_user.battles.reverse
+
     @battles.each do |battle|
       if battle.all_played?
         @finished_battles.push(battle)
@@ -54,11 +74,14 @@ class BattlesController < ApplicationController
     @battle = Battle.find(params[:id])
     battle_answer_notification(@battle, false)
     @battle.destroy
+
     redirect_to battles_path
   end
 
   def ranking
     @users = User.order(:wins, :battle_points).reverse
+
+    return @users
   end
 
   def answer
@@ -69,16 +92,26 @@ class BattlesController < ApplicationController
     question = battle.questions[question_position]
     @answer_letter = params[:alternative]
 
-    unless params[:alternative].blank?
-      question.update_attribute(:users_tries, question.users_tries + 1)
+    if not params[:alternative].blank?
+      # nothing to do
+    else
+      new_question_tries = question.users_tries + 1
+      question.update_attribute(:users_tries, new_question_tries)
 
       @correct_answer = (@answer_letter == question.right_answer)
-      question.update_attribute(:users_hits, question.users_hits + 1) if @correct_answer
+
+      if @correct_answer
+        question.update_attribute(:users_hits, question.users_hits + 1)
+      else
+        # nothing to do
+      end
+
       if is_player_1?(battle)
         battle.player_1_answers[question_position] = @answer_letter
       else
         battle.player_2_answers[question_position] = @answer_letter
       end
+
       question_position = question_position.succ
       battle.save
     end
@@ -94,12 +127,20 @@ class BattlesController < ApplicationController
 
   def finish
     @battle = Battle.find(params[:id])
-    player_answers = is_player_1?(@battle) ? @battle.player_1_answers : @battle.player_2_answers
+
+    if is_player_1?(@battle)
+      player_answers = @battle.player_1_answers
+    else
+      player_answers = @battle.player_2_answers
+    end
+
     @answers = @battle.questions.zip(player_answers)
     player_comparison = @answers.map { |x, y| x.right_answer == y }
     player_comparison.delete(false)
 
     @player_points = player_comparison.count
+
+    return @player_points
   end
 
   def result
@@ -112,6 +153,7 @@ class BattlesController < ApplicationController
     end
 
     @battle.reload
+
     if is_player_1?(@battle)
       current_player_answers = @battle.player_1_answers
       adversary_answers = @battle.player_2_answers
@@ -124,14 +166,51 @@ class BattlesController < ApplicationController
       @adversary_stats = [@player_1_points, @battle.player_1_time]
     end
 
-    @current_player_stats[1] = @current_player_stats.second >= 610 ? "--:--" : "#{@current_player_stats.second/60}:#{@current_player_stats.second%60 < 10 ? "0" : ""}#{@current_player_stats.second%60}"
-    @adversary_stats[1] = @adversary_stats.second >= 610 ? "--:--" : "#{@adversary_stats.second/60}:#{@adversary_stats.second%60 < 10 ? "0" : ""}#{@adversary_stats.second%60}"
+    if @current_player_stats.second >= 610
+      @current_player_stats[1] = "--:--"
+    else
+      minutes_string = "#{@current_player_stats.second / 60}"
+      seconds_string = ":"
+
+      if @current_player_stats.second % 60 < 10
+        second_string = second_string + "0"
+      else
+        # nothing to do
+      end
+
+      seconds_mod = "#{@current_player_stats.second % 60}"
+      second_string = second_string + seconds_mod
+
+      @current_player_stats[1] = minutes_string + seconds_string
+    end
+
+    if @adversary_stats.second >= 610
+      @adversary_stats[1] = "--:--"
+    else
+      minutes_string = "#{@adversary_stats.second / 60}"
+      seconds_string = ":"
+
+      if @adersary_stats.second % 60 < 10
+        second_string = second_string + "0"
+      else
+        # nothing to do
+      end
+
+      seconds_mod = "#{@adersary_stats.second % 60}"
+      second_string = second_string + seconds_mod
+
+      @adversary_stats[1] = minutes_string + seconds_string
+    end
+
     @answers = @battle.questions.zip(current_player_answers, adversary_answers)
   end
 
   def generate_random_user
-    random_user = (User.all - [current_user]).sample
+    users_except_current = User.all - [current_user]
+
+    random_user = users_except_current.sample
 
     render :text => random_user.nickname
   end
 end
+

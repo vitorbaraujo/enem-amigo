@@ -1,6 +1,10 @@
 module ExamsHelper
 
   BLANK_STRING = ""
+  MATH_AREA = "matemática e suas tecnologias"
+  SCIENCE_AREA = "ciências humanas e suas tecnologias"
+  LANGUAGES_AREA = "linguagens, códigos e suas tecnologias"
+  NATURE_AREA = "ciências da natureza e suas tecnologias"
 
   def fill_user_answers exam
     exam.questions.each do |t|
@@ -28,11 +32,6 @@ module ExamsHelper
   end
 
   def push_questions_auxiliar(questions)
-    MATH_AREA = "matemática e suas tecnologias"
-    SCIENCE_AREA = "ciências humanas e suas tecnologias"
-    LANGUAGES_AREA = "linguagens, códigos e suas tecnologias"
-    NATURE_AREA = "ciências da natureza e suas tecnologias"
-
     @humans_questions = questions.where(area: SCIENCE_AREA)
     @math_questions = questions.where(area: MATH_AREA)
     @language_questions = questions.where(area: LANGUAGES_AREA)

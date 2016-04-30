@@ -72,7 +72,7 @@ class ExamsController < ApplicationController
  # -none
  # return:redirect_to root_path
   def cancel_exam
-    exam |\= Exam.find(params[:exam_id])
+    exam = Exam.find(params[:exam_id])
     exam.destroy
     return redirect_to root_path
   end
