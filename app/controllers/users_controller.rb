@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def new
     @home_page = true
     @user = User.new
+    assert(@user.kind_of?(User))
 
     if logged_in?
         return redirect_to(current_user)
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    assert(@user.kind_of?(User))
     return @user
   end
 
@@ -28,6 +30,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    assert(@user.kind_of?(User))
     return find_level(current_user.points)
   end
 
@@ -47,6 +50,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    assert(@user.kind_of?(User))
     if @user.update_attributes(user_params)
       flash[:success]= "Usuário atualizado"
       return redirect_to(@user)
@@ -56,7 +60,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    return @users = User.all
+    @users = User.all
+    return @users
   end
 
   def ranking
@@ -65,7 +70,8 @@ class UsersController < ApplicationController
     else
       # nothing to do
     end
-      return @users = User.order(:points).reverse
+      @users = User.order(:points).reverse
+      return @users
   end
 
   def delete_profile_image
@@ -75,7 +81,7 @@ class UsersController < ApplicationController
     else
       flash[:danger] = "Não há foto de perfil para ser removida."
     end
-    return redirect_to user_path(current_user.id)
+    return redirect_to(user_path(current_user.id))
   end
 
   private
