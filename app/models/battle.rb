@@ -13,6 +13,12 @@ class Battle < ActiveRecord::Base
 
   EMPTY_STRING = ""
 
+  # name: generate_questions
+  # explanation: this method creates a set of questions of a given category,
+  #   or from all questions, if no category is given
+  # parameters:
+  # - none
+  # return: 10 questions as described above
   def generate_questions
     if self.category == EMPTY_STRING
       self.questions = Question.all
@@ -23,6 +29,11 @@ class Battle < ActiveRecord::Base
     end
   end
 
+  # name: all_played?
+  # explanation: checks if both players have started the battle
+  # parameters:
+  # - none
+  # return: true if both players started the battle, false otherwise
   def all_played?
     both_players_started = self.player_1_start and self.player_2_start
     return both_players_started
