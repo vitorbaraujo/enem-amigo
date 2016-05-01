@@ -3,6 +3,11 @@ module BattlesHelper
   INICIAL_BATTLE_ANSWERS = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
   WIN_POINTS_BATTLE = 25
 
+  # name: player_started?
+  # explanation: checks if the current player has started the battle
+  # parameters:
+  # - battle: object
+  # return: true if the player started the battle, false otherwise
   def player_started?(battle)
     if is_player_1?(battle)
       return battle.player_1_start
@@ -11,6 +16,11 @@ module BattlesHelper
     end
   end
 
+  # name: start_battle
+  # explanation: assign initial settings to a battle when this one starts
+  # parameters:
+  # - battle: object
+  # return: a battle with the settings assigned
   def start_battle(battle)
   	if is_player_1?(battle)
   		battle.player_1_start = true
@@ -27,10 +37,20 @@ module BattlesHelper
     return battle
   end
 
+  # name: is_player_1
+  # explanation: checks if current player is player_1 of the battle
+  # parameters:
+  # - battle: object
+  # return: true if the current player is player_1, false otherwise
   def is_player_1?(battle)
     return current_user == battle.player_1
   end
 
+  # name: process_result
+  # explanation: assigns results to the battle when this one ends
+  # parameters:
+  # - none
+  # return: a battle with all the parameters assigned
   def process_result
     battle = Battle.find(params[:id])
 
@@ -84,6 +104,11 @@ module BattlesHelper
     return battle
   end
 
+  # name: verify_participation
+  # explanation: checks if user has already participated the battle
+  # parameters:
+  # - none
+  # return: void
   def verify_participation
     battle = Battle.find(params[:id])
 
@@ -93,6 +118,11 @@ module BattlesHelper
     end
   end
 
+  # name: verify_all_played
+  # explanation: checks if both players have played the battle
+  # parameters:
+  # - none
+  # return: void
   def verify_all_played
     battle = Battle.find(params[:id])
 
@@ -104,6 +134,11 @@ module BattlesHelper
     end
   end
 
+  # name: verify_current_user_played
+  # explanation: checks if the current player has played the battle
+  # parameters:
+  # - none
+  # return: void
   def verify_current_user_played
     battle = Battle.find(params[:id])
 
@@ -115,6 +150,11 @@ module BattlesHelper
     end
   end
 
+  # name: count_questions
+  # explanation: counts how many questions each players got right
+  # parameters:
+  # - none
+  # return: void
   def count_questions
     p1_comp = @battle.questions.zip(@battle.player_1_answers)
     p1_comp = p1_comp.map { |x, y| x.right_answer == y }
@@ -131,6 +171,11 @@ module BattlesHelper
     @player_2_points = player_2_comparison.count
   end
 
+  # name: process_time
+  # explanation: process time that the current player spent in the battle
+  # parameters:
+  # - battle: object
+  # return: void
   def process_time(battle)
     if is_player_1?(battle)
       new_player_1_time = Time.now.to_i - battle.player_1_time
@@ -141,6 +186,11 @@ module BattlesHelper
     end
   end
 
+  # name: question_number
+  # explanation: counts how many questions the current player answered
+  # parameters:
+  # - battle: object
+  # return: number of questions as described above
   def question_number(battle)
     if is_player_1?(battle)
       answers = battle.player_1_answers

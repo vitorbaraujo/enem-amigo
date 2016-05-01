@@ -6,7 +6,12 @@ module ExamsHelper
   LANGUAGES_AREA = "linguagens, códigos e suas tecnologias"
   NATURE_AREA = "ciências da natureza e suas tecnologias"
 
-  def fill_user_answers exam
+  # name: fill_user_answers
+  # explanation: fills the exam answers by answers given by user
+  # parameters:
+  # - exam: object
+  # return: the exam filled with the user answers
+  def fill_user_answers(exam)
     exam.questions.each do |t|
       question = Question.find(t)
 
@@ -31,6 +36,11 @@ module ExamsHelper
     return exam
   end
 
+  # name: push_questions_auxiliar
+  # explanation: creates auxiliar exam with all questions needed
+  # parameters:
+  # - questions: relation of questions
+  # return: the auxiliar exam as described above
   def push_questions_auxiliar(questions)
     @humans_questions = questions.where(area: SCIENCE_AREA)
     @math_questions = questions.where(area: MATH_AREA)
@@ -59,6 +69,11 @@ module ExamsHelper
     return auxiliar_exam
   end
 
+  # name: push_questions
+  # explanation: insert questions ans answers for these questions into an exam
+  # parameters:
+  # - auxiliar_exam: exam object
+  # return: the exam ready to be answered
   def push_questions(auxiliar_exam)
     @exam = Exam.new
 
