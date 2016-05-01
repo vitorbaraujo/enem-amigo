@@ -8,15 +8,15 @@ class ExamsController < ApplicationController
  # explanation: this method  associate select_exam view with this controller
  # parameters:
  # -none
- # return: 
+ # return: select_exam
   def select_exam
   end
 
  # name: exams_statistics
- # explanation: this method  associate exams_statistics view with this controller
+ # explanation: this method associate exams_statistics view with this controller
  # parameters:
  # -none
- # return: 
+ # return: exams_statistics
   def exams_statistics
   end
 
@@ -24,7 +24,7 @@ class ExamsController < ApplicationController
  # explanation: this method 
  # parameters:
  # -none
- # return: questions
+ # return: questions of enemamigo
   def answer_exam
     if params[:year_exam] 
       questions ||= Question.where(year: params[:year_exam])
@@ -46,7 +46,7 @@ class ExamsController < ApplicationController
   end
 
  # name: exam_result
- # explanation: this method list result of the exam
+ # explanation: this method list result of the exam of enemamigo
  # parameters:
  # -none
  # return: @exam.user_answers
@@ -67,7 +67,7 @@ class ExamsController < ApplicationController
   end
 
  # name: cancel_exam
- # explanation: this method cancel of exam
+ # explanation: this method cancel of exam of enemamigo
  # parameters:
  # -none
  # return:redirect_to root_path

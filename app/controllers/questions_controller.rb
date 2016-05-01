@@ -7,9 +7,9 @@ class QuestionsController < ApplicationController
 
  # name: index
  # explanation: this method order questions by year and number
- # parameters:
+ # parameters: 
  # -none
- # return: questions
+ # return: questions of enemamigo
   def index
     @questions ||= Question.all.order(:year, :number)
     return @questions
@@ -19,7 +19,7 @@ class QuestionsController < ApplicationController
  # explanation: this method retrieves a single question from id and rertun it to edit view
  # parameters:
  # -none
- # return: question
+ # return: question of enemamigo
   def edit
     @question ||= Question.find(params[:id])
     return @questions
@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
  # explanation: this method retrieves a single question from id and update it 
  # parameters:
  # -none
- # return: question
+ # return: question of enemamigo
   def update
     @question ||= Question.find(params[:id])
     check_update ||= @question.update_attributes(question_params)
@@ -45,7 +45,7 @@ class QuestionsController < ApplicationController
  # explanation: this method order questions 
  # parameters:
  # -none
- # return: questions
+ # return: questions of enemamigo
   def show
     @question ||= Question.find(params[:id])
     return @question
@@ -55,7 +55,7 @@ class QuestionsController < ApplicationController
  # explanation: this method order questions 
  # parameters:
  # -none
- # return: questions
+ # return: questions of enemamigo
   def destroy
     @question ||= Question.find(params[:id])
     @question.destroy
@@ -67,7 +67,7 @@ class QuestionsController < ApplicationController
  # explanation: this method order questions 
  # parameters:
  # -none
- # return: questions
+ # return: questions of enemamigo
   def answer
     question ||= Question.find(params[:id])
     @answer_letter ||= params[:alternative]
@@ -103,7 +103,7 @@ class QuestionsController < ApplicationController
  # explanation: this method  associate category view with this controller
  # parameters:
  # -none
- # return: 
+ # return: category
   def category
   end
 
@@ -111,7 +111,7 @@ class QuestionsController < ApplicationController
  # explanation: this method searches for questions from specific area   
  # parameters:
  # -none
- # return: questions
+ # return: questions of enemamigo
   def nature
     @questions ||= Question.where(area: "ciências da natureza e suas tecnologias").order(:year, :number)
     return @questions
@@ -120,8 +120,8 @@ class QuestionsController < ApplicationController
  # name: humans
  # explanation: this method searches for questions from specific area  
  # parameters:
- # -none
- # return: questions
+ # -none 
+ # return: questions of enemamigo
   def humans
     @questions ||= Question.where(area: "ciências humanas e suas tecnologias").order(:year, :number)
     return @questions
@@ -131,7 +131,7 @@ class QuestionsController < ApplicationController
  # explanation: this method searches for questions from specific area  
  # parameters:
  # -none
- # return: questions
+ # return: questions of enemamigo
   def languages
     @questions ||= Question.where(area: "linguagens, códigos e suas tecnologias").order(:year, :number)
     return @questions
@@ -141,7 +141,7 @@ class QuestionsController < ApplicationController
  # explanation: this method searches for questions from specific area  
  # parameters:
  # -none
- # return: questions
+ # return: questions of enemamigo
   def math
     @questions ||= Question.where(area: "matemática e suas tecnologias").order(:year, :number)
     return @questions
@@ -151,7 +151,7 @@ class QuestionsController < ApplicationController
  # explanation: this method searches for questions from recommended 
  # parameters:
  # -none
- # return: questions
+ # return: questions of enemamigo
   def recommended
     areas ||= ["ciências da natureza e suas tecnologias",
              "ciências humanas e suas tecnologias",
@@ -169,7 +169,7 @@ class QuestionsController < ApplicationController
   end
 
  # name: upload_questions
- # explanation: this method upload questions 
+ # explanation: this method upload questions the enemamigo
  # parameters:
  # -none
  # return: redirect_to questions_path
@@ -194,7 +194,7 @@ class QuestionsController < ApplicationController
  # explanation: this method upload data from candidates 
  # parameters:
  # -none
- # return: redirect_to Question.find(params[:id]).next_questionh
+ # return:redirect_to Question.find(params[:id]).next_questionh
   def upload_candidates_data
     uploaded_file = params[:candidates_data_file]
 
@@ -216,7 +216,7 @@ class QuestionsController < ApplicationController
  # explanation: this method redirects to next question 
  # parameters:
  # -none
- # return: redirect_to Question.find(params[:id]).next_questionh
+ # return:redirect_to Question.find(params[:id]).next_questionh
   def next_question
     return redirect_to Question.find(params[:id]).next_question
   end
@@ -227,7 +227,7 @@ class QuestionsController < ApplicationController
  # explanation: this method udes to collet all the fields from object questions
  # parameters:
  # -none
- # return: 
+ # return: question_params
   def question_params
     params.require(:question).permit(:year, :area, :number, :enunciation, :reference, :image, :right_answer, :alternatives_attributes => [:id, :letter, :description])
   end
