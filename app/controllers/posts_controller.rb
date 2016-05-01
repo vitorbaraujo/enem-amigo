@@ -3,12 +3,22 @@ class PostsController < ApplicationController
   before_action :authenticate_user
   before_action :verify_user_permission, only: [:destroy, :edit, :update]
 
+  # name: new
+  # explanation: instantiates a new post
+  # parameters:
+  # - none
+  # return: a post object
   def new
     @post = Post.new
 
     return @post
   end
 
+  # name: create
+  # explanation: fills the post object with info given by user
+  # parameters:
+  # - none
+  # return: void
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
@@ -22,24 +32,44 @@ class PostsController < ApplicationController
     end
   end
 
+  # name: show
+  # explanation: shows a single post given an identifier
+  # parameters:
+  # - none
+  # return: a post object as described above
   def show
     @post = Post.find(params[:id])
 
     return @post
   end
 
+  # name: index
+  # explanation: shows a list of all posts
+  # parameters:
+  # - none
+  # return: a relation of posts as described above
   def index
     @posts = Post.all
 
     return @posts
   end
 
+  # name: edit
+  # explanation: finds a post to edit given an identifier
+  # parameters:
+  # - none
+  # return: a post object as described above
   def edit
     @post = Post.find(params[:post_id])
 
     return @post
   end
 
+  # name: update
+  # explanation: fills the post object info given by user to edit a post
+  # parameters:
+  # - none
+  # return: void
   def update
     @post = Post.find(params[:post_id])
 
@@ -51,12 +81,23 @@ class PostsController < ApplicationController
     end
   end
 
+  # name: user_name
+  # explanation: finds a user given an identifier, and then returns its name
+  # parameters:
+  # - none
+  # return: a string with the name of the user found
   def user_name(user_id)
     user = User.where(id: user_id).name
 
     return user
   end
 
+  # name: rate_post
+  # explanation: finds a post given an identifier and then mark this post as
+  #  rated by user
+  # parameters:
+  # - none
+  # return: void
   def rate_post
     render nothing: true
     post = Post.find(params[:id])
@@ -69,6 +110,11 @@ class PostsController < ApplicationController
     end
   end
 
+  # name: destroy
+  # explanation: destroys a single post given an identifier
+  # parameters:
+  # - none
+  # return: void
   def destroy
     @post = Post.find(params[:post_id])
     @post.destroy
@@ -79,6 +125,11 @@ class PostsController < ApplicationController
 
   private
 
+  # name: post_params
+  # explanation: permit some parameters to be included in a post
+  # parameters:
+  # - none
+  # return: void
   def post_params
     params.require(:post).permit(:content)
   end

@@ -9,12 +9,22 @@ class BattlesController < ApplicationController
 
   EMPTY_ARRAY = []
 
+  # name: new
+  # explanation: instantiates a new battle object
+  # parameters:
+  # - none
+  # return: a battle object
   def new
     @battle = Battle.new
 
     return @battle
   end
 
+  # name: create
+  # explanation: fills the battle object with parameters given
+  # parameters:
+  # - none
+  # return: void
   def create
     player_2_user = User.where(nickname: params[:player_2_nickname]).first
 
@@ -33,6 +43,11 @@ class BattlesController < ApplicationController
     end
   end
 
+  # name: show
+  # explanation: displays a single battle given an identifier
+  # parameters:
+  # - none
+  # return: void
   def show
     @battle = Battle.find(params[:id])
 
@@ -53,6 +68,11 @@ class BattlesController < ApplicationController
     @question = @battle.questions.first
   end
 
+  # name: index
+  # explanation: show a list of battles
+  # parameters:
+  # - none
+  # return: three array of battles (pending, waiting and finished battles)
   def index
     @pending_battles = EMPTY_ARRAY
     @waiting_battles = EMPTY_ARRAY
@@ -70,6 +90,11 @@ class BattlesController < ApplicationController
     end
   end
 
+  # name: destroy
+  # explanation: destroy a single battle given an identifier
+  # parameters:
+  # - none
+  # return: void
   def destroy
     @battle = Battle.find(params[:id])
     battle_answer_notification(@battle, false)
@@ -78,12 +103,22 @@ class BattlesController < ApplicationController
     redirect_to battles_path
   end
 
+  # name: ranking
+  # explanation: displays a ranking of users by their battle points
+  # parameters:
+  # - none
+  # return: a relation of users as described above
   def ranking
     @users = User.order(:wins, :battle_points).reverse
 
     return @users
   end
 
+  # name: answer
+  # explanation: fills battle attributes by answers given by user
+  # parameters:
+  # - none
+  # return: void
   def answer
     battle = Battle.find(params[:id])
 
@@ -125,6 +160,12 @@ class BattlesController < ApplicationController
     end
   end
 
+  # name: finish
+  # explanation: calculates the winner and points of the battle, when this
+  #  finishes
+  # parameters:
+  # - none
+  # return: points of player who won the battle
   def finish
     @battle = Battle.find(params[:id])
 
@@ -143,6 +184,12 @@ class BattlesController < ApplicationController
     return @player_points
   end
 
+  # name: result
+  # explanation: displays results of a battle, like the time spent for each
+  #  user, and their points
+  # parameters:
+  # - none
+  # return:
   def result
     @battle = Battle.find(params[:id])
 
@@ -205,6 +252,12 @@ class BattlesController < ApplicationController
     @answers = @battle.questions.zip(current_player_answers, adversary_answers)
   end
 
+  # name: generate_random_user
+  # explanation: generate a random user to play the battle with, if the user
+  #  choses to battle with a random person
+  # parameters:
+  # - none
+  # return: void
   def generate_random_user
     users_except_current = User.all - [current_user]
 
