@@ -4,7 +4,7 @@ module SessionsHelper
  # explanation: this method check if user logged 
  # parameters:
  # -none
- #return: user
+ #return: user of enemamigo
   def log_in(user)
     session[:user_id] ||= user.id
   end
@@ -22,7 +22,7 @@ module SessionsHelper
  # explanation: this method check if user logged 
  # parameters:
  # -none
- #return: logged
+ #return: logged of enemamigo
   def logged_in?
     !current_user.nil?
   end
@@ -31,7 +31,7 @@ module SessionsHelper
  # explanation: this method check if user log out
  # parameters:
  # -none
- #return: log_out
+ #return: log_out of enemamigo
   def log_out
     session.delete(:user_id)
     @current_user ||= nil
@@ -54,7 +54,7 @@ module SessionsHelper
  # explanation: this method check the authenticate of admin
  # parameters:
  # -none
- #return: authenticate_admin
+ #return: authenticate_admin of enemamigo
   def authenticate_admin
     if !current_user.role_admin?
       redirect_to_back(root_path) 
@@ -67,7 +67,7 @@ module SessionsHelper
  # explanation: this method the veriry permission of user
  # parameters:
  # -none
- #return: user
+ #return: user of enemamigo
   def verify_user_permission
     user ||= User.find(params[:id])
     if !(user.id == current_user.id || current_user.role_admin?)
@@ -81,7 +81,7 @@ module SessionsHelper
  # explanation: this method the redirect to back
  # parameters:
  # -none
- #return: 
+ #return: redirect_to_back
   def redirect_to_back(default = root_path)
     if !request.env["HTTP_REFERER"].blank? && request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
       redirect_to :back

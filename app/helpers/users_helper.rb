@@ -4,7 +4,7 @@ module UsersHelper
  # explanation: this method the ten users with the highest score
  # parameters:
  # -none
- #return: ranking
+ #return: ranking of enemamigo
   def top10
     ranking = User.all.order(:points).reverse
     @top10 = ranking.take(10)
@@ -14,7 +14,7 @@ module UsersHelper
  # explanation: this method level of user without updating it
  # parameters:
  # -none
- #return: level
+ #return: level of enemamigo
   def find_level user_points
     @user_level = (Math.sqrt 2*user_points).to_i
   end
@@ -23,7 +23,7 @@ module UsersHelper
  # explanation: this method update user level
  # parameters:
  # -none
- #return: level 
+ #return: level of enemamigo
   def update_user_level
     current_user.update_attribute(:level,@user_level)
     @user_level = current_user.level
