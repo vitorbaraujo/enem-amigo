@@ -13,7 +13,9 @@ class TopicsController < ApplicationController
   # return: a topic object
 
 	def new
-		return @topic = Topic.new
+		@topic = Topic.new
+    assert(@topic.kind_of?(Topic))
+    return @topic
 	end
 
   # name: create
@@ -24,14 +26,13 @@ class TopicsController < ApplicationController
 
 	def create
 		@topic = Topic.new(topic_params)
-
+    assert(@topic.kind_of?(Topic))
 		if @topic.save
 			flash[:success] = "Tópico criado com sucesso"
 			return redirect_to (@topic)
 		else
       #nothing to do
     end
-    
 	end
 
   # name: show
@@ -42,7 +43,9 @@ class TopicsController < ApplicationController
 
 	def show
 		@topic = Topic.find(params[:id])
-		return session[:topic_id] = @topic.id
+    assert(@topic.kind_of?(Topic))
+		session[:topic_id] = @topic.id
+    return session[:topic_id]
 	end
 
 	# name: index
@@ -52,7 +55,8 @@ class TopicsController < ApplicationController
   # return: topics objects
 
 	def index
-		return @topics = Topic.all
+		@topics = Topic.all
+    return @topics
 	end
 
 	private

@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
   # return: home_page object
 
   def new
-    return @home_page = true
+    @home_page = true
+    return @home_page
   end
 
   # name: log_user_in
