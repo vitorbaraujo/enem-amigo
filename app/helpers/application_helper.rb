@@ -7,7 +7,7 @@ module ApplicationHelper
   # explanation: returns the full title depending on the current page
   # parameters:
   # page_title
-  # return: the full title
+  # return: the full title of enem amigo
 
   def full_title(page_title)
 		page_title = PAGE_TITLE 
