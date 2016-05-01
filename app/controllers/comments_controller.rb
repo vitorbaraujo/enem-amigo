@@ -4,10 +4,10 @@ class CommentsController < ApplicationController
   before_action :verify_user_permission, only: [:destroy, :edit]
 
   # name: new
-  # explanation: instantiates object
+  # explanation: instantiates an object
   # parameters:
   # -none
-  # return: comment object
+  # return: a comment object
 
   def new
     return @comment = Comment.new
@@ -33,10 +33,10 @@ class CommentsController < ApplicationController
     end
 
   # name: edit
-  # explanation: find comment to update
+  # explanation: find a comment to update
   # parameters:
   # -none
-  # return: comment object
+  # return: a comment object
 
   def edit
     return @comment = Comment.find(params[:comment_id])
@@ -46,7 +46,7 @@ class CommentsController < ApplicationController
   # explanation: update a comment
   # parameters:
   # -none
-  # return: topic or edit_post_comment_path
+  # return: a topic or edit_post_comment_path
 
   def update
     @comment = Comment.find(params[:comment_id])

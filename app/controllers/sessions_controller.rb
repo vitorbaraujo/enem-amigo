@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   end
 
   # name: log_user_in
-  # explanation: log in 
+  # explanation: log user into enem amigo
   # parameters:
   # -none
   # return: message of sucess or render new
@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
   end
 
   # name: log_user_out
-  # explanation: log out
+  # explanation: log user out of enem amigo
   # parameters:
   # -none
   # return: login_path

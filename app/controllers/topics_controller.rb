@@ -7,10 +7,10 @@ class TopicsController < ApplicationController
   before_action :authenticate_admin, only: [ :new, :create, :edit, :destroy, :update ]
 
   # name: new
-  # explanation: instantiates object
+  # explanation: instantiates an object
   # parameters:
   # -none
-  # return: topic object
+  # return: a topic object
 
 	def new
 		return @topic = Topic.new
