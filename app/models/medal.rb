@@ -15,6 +15,11 @@ class Medal < ActiveRecord::Base
 
   private
 
+  # name: instructions_work
+  # explanation: Checks if instructions about the medals's behavior are correct
+  # parameters:
+  # - none
+  # return: method to check if instructions are in the correct class
   def instructions_work
     current_user = User.create(name: "Joao", email: "joao@gmail.com", password: "12345678", nickname: "joaovitor")
     current_user.restore_attributes
@@ -37,8 +42,14 @@ class Medal < ActiveRecord::Base
     return instructions_return_valid_class(achieved_return, message_return)
   end
 
+  # name: instructions_return_valid_class
+  # explanation: Checks if parameters are in the correct class (boolean and string)
+  # parameters:
+  # - achieved_return: boolean from achieved? method
+  # - message_return: String with instructions
+  # return: none
   def instructions_return_valid_class(achieved_return, message_return)
-    if (achieved_return.class != TrueClass and achieved_return.class != FalseClass)
+    if (achieved_return.class != TrueClass && achieved_return.class != FalseClass)
       errors.add(:achieved_instructions, "Achieved must be True or False")
     else
       # nothing to do
@@ -51,6 +62,11 @@ class Medal < ActiveRecord::Base
     end
   end
 
+  # name: achieved?
+  # explanation: Checks if user got the medal
+  # parameters:
+  # - current_user: Object from User class that represents the current user of the system
+  # return: none
   def achieved?(current_user)
     achieved_instructions.each do |instruction|
       eval instruction
@@ -60,6 +76,11 @@ class Medal < ActiveRecord::Base
       errors.add(:achieved_instructions, "Invalid instructions")
   end
 
+  # name: message
+  # explanation: Display the message with that is missing to win the medal
+  # parameters:
+  # - current_user: Object from User class that represents the current user of the system
+  # return: none
   def message(current_user)
     message_instructions.each do |instruction|
       eval instruction

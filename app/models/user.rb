@@ -27,11 +27,21 @@ class User < ActiveRecord::Base
   uniqueness: { case_sensitive: false }
   validates :password, length:{minimum: 8}, presence: true
 
+  # name: User.digest
+  # explanation: creates a safe encrypted password for user
+  # parameters:
+  # - string: password defined by user
+  # return: none
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
     BCrypt::Password.create(string, cost: cost)
   end
 
+  # name: count_questions_by_area
+  # explanation: counts right questions of User in a given area
+  # parameters:
+  # - area: string that represents the area of the question
+  # return: all right questions in the area
   def count_questions_by_area(area)
     right_questions_in_area = 0
     self.accepted_questions.each do |t|
@@ -44,6 +54,11 @@ class User < ActiveRecord::Base
     return right_questions_in_area
   end
 
+  # name: find_position_in_raking
+  # explanation: Finds a user position in system's ranking by points
+  # parameters:
+  # - none
+  # return: position in ranking
   def find_position_in_ranking
     ranking = User.all.order(:points).reverse
     for i in 0...ranking.count
@@ -55,11 +70,21 @@ class User < ActiveRecord::Base
     end
   end
 
+  # name: total_accepted_questions
+  # explanation: gets all right questions from a user
+  # parameters:
+  # - none
+  # return: all right questions
   def total_accepted_questions
     all_right_questions = self.accepted_questions.count
     return all_right_questions
   end
 
+  # name: data
+  # explanation: creates info about all questions by area from user to use in system
+  # parameters:
+  # - none
+  # return: none
   def data
     [
       ["Matemática", self.count_questions_by_area('matemática e suas tecnologias')],
@@ -69,6 +94,11 @@ class User < ActiveRecord::Base
     ]
   end
 
+  # name: sum_exam_performance
+  # explanation: creates info about the user's perfomance in all exams
+  # parameters:
+  # - none
+  # return: exam performance updated 
   def sum_exam_performance
     if self.exam_performance.empty?
       return 0
@@ -77,15 +107,31 @@ class User < ActiveRecord::Base
     end
   end
 
+  # name: progress
+  # explanation: checks a user's progress based on right questions by all questions
+  # parameters:
+  # - none
+  # return: progress
   def progress
     progress_in_system = (100 * self.total_accepted_questions.to_f/Question.all.count).round(2)
     return progress_in_system
   end
 
+  # name: battles
+  # explanation: shows number of battles of a user
+  # parameters:
+  # - none
+  # return: number of battles
   def battles
-    return (self.active_battles + self.passive_battles).sort
+    battles = (self.active_battles + self.passive_battles).sort 
+    return battles
   end
 
+  # name: average_performance
+  # explanation: shows average performance in a given area by right questions by tried questions
+  # parameters:
+  # - area: String that represents the area of a question
+  # return: average performance or 0.0
   def average_performance(area)
     accepted_questions = []
     tried_questions = []
@@ -114,6 +160,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  # name: classification
+  # explanation: 
+  # parameters:
+  # - area: String that represents the area of a question
+  # return: String that specifies how good the user is
   def classification(area)
     performance = self.average_performance area
     performance *= 100
