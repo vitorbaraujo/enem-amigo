@@ -16,6 +16,7 @@ class BattlesController < ApplicationController
   # return: a battle object
   def new
     @battle = Battle.new
+    assert(@battle.kind_of?(Battle))
 
     return @battle
   end
@@ -27,8 +28,11 @@ class BattlesController < ApplicationController
   # return: void
   def create
     player_2_user = User.where(nickname: params[:player_2_nickname]).first
+    assert(player_2_user.kind_of?(User))
 
     @battle = Battle.new(player_1: current_user, player_2: player_2_user)
+    assert(@battle.kind_of?(Battle))
+
     @battle.category = params[:battle][:category]
     @battle.generate_questions
 
@@ -53,7 +57,7 @@ class BattlesController < ApplicationController
 
     start_battle(@battle)
 
-    if is_player_1(@battle)
+    if is_player_1?(@battle)
       # nothing to do
     else
       battle_answer_notification(@battle, true)
@@ -77,7 +81,9 @@ class BattlesController < ApplicationController
     @pending_battles = EMPTY_ARRAY
     @waiting_battles = EMPTY_ARRAY
     @finished_battles = EMPTY_ARRAY
+
     @battles = current_user.battles.reverse
+    assert(@battles.kind_of?(Array))
 
     @battles.each do |battle|
       if battle.all_played?
@@ -97,6 +103,8 @@ class BattlesController < ApplicationController
   # return: void
   def destroy
     @battle = Battle.find(params[:id])
+    assert(@battle.kind_of?(Battle))
+
     battle_answer_notification(@battle, false)
     @battle.destroy
 
@@ -121,6 +129,7 @@ class BattlesController < ApplicationController
   # return: void
   def answer
     battle = Battle.find(params[:id])
+    assert(battle.kind_of?(Battle))
 
     question_position = question_number(battle)
 
