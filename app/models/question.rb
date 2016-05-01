@@ -41,7 +41,7 @@ class Question < ActiveRecord::Base
  # explanation: this method redirects to next question 
  # parameters:
  # -none
- # return: question
+ # return: question of enemamigo
   def next_question
     question ||= Question.where(area: self.area).where("id > ?", id).first
     if !question
@@ -56,7 +56,7 @@ class Question < ActiveRecord::Base
  # explanation: this method calculates hit rate of user 
  # parameters:
  # -none
- # return: users_hit_rate
+ # return: users_hit_rate of enemamigo
   def users_hit_rate
     if self.users_tries == 0
       users_hit_rate ||= 0
@@ -86,7 +86,7 @@ class Question < ActiveRecord::Base
  # explanation: this method return an hash with data for comparison
  # parameters:
  # -none
- # return:
+ # return: data
   def data
     [
       {"name" => "Enem","data" => {"Enem" => self.hit_rate}},
@@ -100,7 +100,7 @@ class Question < ActiveRecord::Base
  # explanation: this method calculates hit rate
  # parameters:
  # -none
- # return: question
+ # return: question of enemamigo
     def method_missing method_name, *args
       method_name = method_name.to_s
       if method_name.slice! /_questions/
@@ -121,7 +121,7 @@ class Question < ActiveRecord::Base
  # explanation: this method validates amount of alternatives 
  # parameters:
  # -none
- # return: alternatives
+ # return: alternatives of user
     def alternatives_count_valid?
       self.alternatives.size == ALTERNATIVES_COUNT
     end
@@ -130,7 +130,7 @@ class Question < ActiveRecord::Base
  # explanation: this method check number of alternatives
  # parameters:
  # -none
- # return: alternatives
+ # return: alternatives of user
     def check_alternatives_number
       if !alternatives_count_valid?
         errors.add(:alternatives, "cannot be less than 5")
