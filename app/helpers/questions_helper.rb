@@ -2,8 +2,12 @@ module QuestionsHelper
 
   class Parser
     class << self
-
-      def read_questions json_questions
+    # name: read_questions
+    # explanation: creates questions and topics to these questions on the system based on a JSON file
+    # parameters:
+    # -json_questions: A JSON file with questions from exam
+    # return: none
+      def read_questions(json_questions)
         questions = JSON.parse(json_questions)["questions"]
         questions.each do |question|
           system_question = Question.new
@@ -28,7 +32,13 @@ module QuestionsHelper
         end
       end
 
-      def read_candidates_data candidates_data, test_year
+      # name: read_candidates_data
+      # explanation: method to create info about real student's performance in questions
+      # parameters:
+      # -candidates_data: a JSON file with real student's performance
+      # -test_year: the year of the exam
+      # return: none
+      def read_candidates_data(candidates_data, test_year)
         candidates_data.each_line do |line|
           if line == "\n"
             next
