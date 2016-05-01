@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   # name: count_comment_rates
-  # explanation: this method counts user ratings
+  # explanation: this method counts user ratings of a comment
   # parameters:
   # -none
   # return: amout of user ratings
