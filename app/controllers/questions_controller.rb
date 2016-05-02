@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
  # return: questions of enemamigo
   def index
     @questions ||= Question.all.order(:year, :number)
+    assert(@questions.kind_of?(Question))
     return @questions
   end
 
@@ -22,6 +23,7 @@ class QuestionsController < ApplicationController
  # return: question of enemamigo
   def edit
     @question ||= Question.find(params[:id])
+    assert(@questions.kind_of?(Question))
     return @questions
   end
 
@@ -32,6 +34,7 @@ class QuestionsController < ApplicationController
  # return: question of enemamigo
   def update
     @question ||= Question.find(params[:id])
+    assert(@questions.kind_of?(Question))
     check_update ||= @question.update_attributes(question_params)
     if check_update
       flash[:success] = "Questão atualizada com sucesso!"
@@ -48,6 +51,7 @@ class QuestionsController < ApplicationController
  # return: questions of enemamigo
   def show
     @question ||= Question.find(params[:id])
+    assert(@questions.kind_of?(Question))
     return @question
   end
 
@@ -58,6 +62,7 @@ class QuestionsController < ApplicationController
  # return: questions of enemamigo
   def destroy
     @question ||= Question.find(params[:id])
+    assert(@questions.kind_of?(Question))
     @question.destroy
     flash[:success] = "Questão deletada com sucesso!"
     return redirect_to questions_path
@@ -70,6 +75,7 @@ class QuestionsController < ApplicationController
  # return: questions of enemamigo
   def answer
     question ||= Question.find(params[:id])
+    assert(questions.kind_of?(Question))
     @answer_letter ||= params[:alternative]
 
     if params[:alternative].blank?
@@ -114,6 +120,7 @@ class QuestionsController < ApplicationController
  # return: questions of enemamigo
   def nature
     @questions ||= Question.where(area: "ciências da natureza e suas tecnologias").order(:year, :number)
+    assert(@questions.kind_of?(Question))
     return @questions
   end
 
@@ -124,6 +131,7 @@ class QuestionsController < ApplicationController
  # return: questions of enemamigo
   def humans
     @questions ||= Question.where(area: "ciências humanas e suas tecnologias").order(:year, :number)
+    assert(@questions.kind_of?(Question))
     return @questions
   end
 
@@ -134,6 +142,7 @@ class QuestionsController < ApplicationController
  # return: questions of enemamigo
   def languages
     @questions ||= Question.where(area: "linguagens, códigos e suas tecnologias").order(:year, :number)
+    assert(@questions.kind_of?(Question))
     return @questions
   end
 
@@ -144,6 +153,7 @@ class QuestionsController < ApplicationController
  # return: questions of enemamigo
   def math
     @questions ||= Question.where(area: "matemática e suas tecnologias").order(:year, :number)
+    assert(@questions.kind_of?(Question))
     return @questions
   end
 
@@ -183,7 +193,7 @@ class QuestionsController < ApplicationController
     end
 
     file_content = uploaded_file.read
-
+      assert(file_content.nil? == false)
     Parser.read_questions(file_content)
 
     flash[:success] = "Questões armazenadas com sucesso."
@@ -219,6 +229,7 @@ class QuestionsController < ApplicationController
  # return:redirect_to Question.find(params[:id]).next_questionh
   def next_question
     return redirect_to Question.find(params[:id]).next_question
+    assert(@questions.kind_of?(Question))
   end
 
   private
