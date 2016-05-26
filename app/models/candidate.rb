@@ -2,7 +2,7 @@
 # Purpose: Implementation of candidate's class 
 # License : LGPL. No copyright.
 
-# Candidate represents the students that make ENEM test.
+# Candidate represents the students that make ENEM test
 
 class Candidate < ActiveRecord::Base
 	
