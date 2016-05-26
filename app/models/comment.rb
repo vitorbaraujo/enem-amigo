@@ -1,3 +1,10 @@
+# File: comment.rb
+# Purpose: Implementation of comment's class 
+# License : LGPL. No copyright.
+
+# Comments are present in the application’s forum where discussions are held among users.
+# These comments allow interaction between users.
+
 class Comment < ActiveRecord::Base
   serialize :user_ratings, Array
   validates :content, presence: true
