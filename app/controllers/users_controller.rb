@@ -1,3 +1,9 @@
+# File: users_controller.rb
+# Purpose: Maintain logic for users.
+# License: LGPL. No copyright.
+
+# This controller contain general methods regarding users objects.
+
 class UsersController < ApplicationController
 
   before_action :authenticate_user, except: [:ranking, :new, :create]
@@ -7,11 +13,11 @@ class UsersController < ApplicationController
   # explanation: this method creates a new object of class User
   # parameters:
   # - none
-  # return: if logged in, redirect to user's page. 
+  # return: if logged in, redirect to user's page.
   def new
     @home_page = true
     @user = User.new
-    assert(@user.kind_of?(User))  
+    assert(@user.kind_of?(User))
 
     if logged_in?
         return redirect_to(current_user)
@@ -21,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   # name: edit
-  # explanation: this method finds a user with a given id  
+  # explanation: this method finds a user with a given id
   # parameters:
   # - none
   # return: returns the user found
