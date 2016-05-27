@@ -1,3 +1,9 @@
+# File: notifications_controller.rb
+# Purpose: Maintain logic for notifications.
+# License: LGPL. No copyright.
+
+# This controller lists notifications to user and indicates read messages.
+
 class NotificationsController < ApplicationController
 
   # name: index
