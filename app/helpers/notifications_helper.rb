@@ -1,3 +1,10 @@
+# File: notifications_helper.rb
+# Purpose: Maintain additional logic for notifications.
+# License: LGPL. No copyright.
+
+# This helper maintain methods to create a notification, to create a battle
+# answer notification and to create the first notification in the system.
+
 module NotificationsHelper
 
   # name: new_battle_notification
@@ -25,7 +32,7 @@ module NotificationsHelper
   # return: none
   def battle_answer_notification(battle, answer)
     message = "#{current_user.name} "
-    if answer 
+    if answer
       message = message + ""
     else
       message = message + "não "

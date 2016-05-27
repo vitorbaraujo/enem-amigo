@@ -1,9 +1,16 @@
+# File: questions_helper.rb
+# Purpose: Maintain additional logic for questions.
+# License: LGPL. No copyright.
+
+# This helper contains the method that parses information into the system.
+
 module QuestionsHelper
 
   class Parser
     class << self
     # name: read_questions
-    # explanation: creates questions and topics to these questions on the system based on a JSON file
+    # explanation: creates questions and topics to these questions on the system
+    # based on a JSON file
     # parameters:
     # -json_questions: A JSON file with questions from exam
     # return: none
@@ -33,7 +40,8 @@ module QuestionsHelper
       end
 
       # name: read_candidates_data
-      # explanation: method to create info about real student's performance in questions
+      # explanation: method to create info about real student's performance in
+      # questions.
       # parameters:
       # -candidates_data: a JSON file with real student's performance
       # -test_year: the year of the exam
