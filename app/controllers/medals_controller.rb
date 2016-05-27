@@ -1,3 +1,9 @@
+# File: medals_controller.rb
+# Purpose: Maintain logic for medals.
+# License: LGPL. No copyright.
+
+# This controller sets the behavior for showing medals a user does not have.
+
 class MedalsController < ApplicationController
 
   before_action :authenticate_user
