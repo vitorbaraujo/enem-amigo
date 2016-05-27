@@ -1,3 +1,10 @@
+# File: user.rb
+# Purpose: Implementation of user's class
+# License : LGPL. No copyright.
+
+# The class user is the main class of the system, because it contains
+# all information about one's progress in the website
+
 class User < ActiveRecord::Base
 
   has_many :active_battles, class_name: 'Battle', foreign_key: 'player_1_id'
@@ -98,7 +105,7 @@ class User < ActiveRecord::Base
   # explanation: creates info about the user's perfomance in all exams
   # parameters:
   # - none
-  # return: exam performance updated 
+  # return: exam performance updated
   def sum_exam_performance
     if self.exam_performance.empty?
       return 0
@@ -123,7 +130,7 @@ class User < ActiveRecord::Base
   # - none
   # return: number of battles
   def battles
-    battles = (self.active_battles + self.passive_battles).sort 
+    battles = (self.active_battles + self.passive_battles).sort
     return battles
   end
 
@@ -161,7 +168,7 @@ class User < ActiveRecord::Base
   end
 
   # name: classification
-  # explanation: 
+  # explanation:
   # parameters:
   # - area: String that represents the area of a question
   # return: String that specifies how good the user is
