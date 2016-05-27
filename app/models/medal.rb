@@ -1,3 +1,9 @@
+# File: medal.rb
+# Purpose: Implementation of the class Medal
+# License: LGPL. No copyright.
+
+# This class represents the recognition by the system of the user's advance.
+
 class Medal < ActiveRecord::Base
 
   has_and_belongs_to_many :users
