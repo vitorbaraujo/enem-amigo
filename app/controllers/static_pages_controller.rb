@@ -1,3 +1,9 @@
+# File: static_pages_controller.rb
+# Purpose: Maintain logic for static pages.
+# License: LGPL. No copyright.
+
+# This controller contain actions to redirect to certain views in system
+
 class StaticPagesController < ApplicationController
 
   before_action :authenticate_user, only: [:home]
@@ -6,7 +12,7 @@ class StaticPagesController < ApplicationController
   # explanation: this method exists only to lead to the action's view, but finds medals and level of user
   # parameters:
   # - none
-  # return: level from user   
+  # return: level from user
   def home
     check_medals()
     assert(current_user.kind_of?(User))
