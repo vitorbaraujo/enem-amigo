@@ -1,3 +1,11 @@
+# File: battles_helper.rb
+# Purpose: Implementation of the Battles Helper
+# License: LGPL. No copyright.
+
+# This helper contains auxiliar methods to be used in the controller of the
+# battle to do lots of checking, i.e., checking if a battle has started of
+# finished, in addition to check who is participating in a given battle
+
 module BattlesHelper
 
   INICIAL_BATTLE_ANSWERS = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
