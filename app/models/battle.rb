@@ -1,3 +1,10 @@
+# File: battle.rb
+# Purpose: Implementation of the class Battle
+# License: LGPL. No copyright.
+
+# This class contains the implementation of a battle between two users, and it
+# also contains methods to regulate the battle
+
 class Battle < ActiveRecord::Base
 
   has_and_belongs_to_many :questions
