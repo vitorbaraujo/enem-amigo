@@ -1,3 +1,11 @@
+# File: medals_helper.rb
+# Purpose: Implementation of the Medals Helper
+# License: LGPL. No copyright.
+
+# This helper contains auxiliar methods to be used in the controller of medals
+# to deal with how many medals a single user has or check if a medal has been
+# defined correctly
+
 module MedalsHelper
 
   EMPTY_ARRAY = []
