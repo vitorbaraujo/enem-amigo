@@ -7,8 +7,12 @@
 
 class Battle < ActiveRecord::Base
 
+  EMPTY_STRING = ""
+  QUESTIONS_IN_A_BATTLE = 10
+
   has_and_belongs_to_many :questions
   has_many :notifications
+
   belongs_to :player_1, class_name: 'User'
   belongs_to :player_2, class_name: 'User'
   belongs_to :winner, class_name: 'User'
@@ -18,8 +22,6 @@ class Battle < ActiveRecord::Base
 
   validates :player_2, presence: true
 
-  EMPTY_STRING = ""
-
   # name: generate_questions
   # explanation: this method creates a set of questions of a given category,
   #   or from all questions, if no category is given
@@ -27,12 +29,14 @@ class Battle < ActiveRecord::Base
   # - none
   # return: 10 questions as described above
   def generate_questions
-    if self.category == EMPTY_STRING
-      self.questions = Question.all
-      return self.questions.sample(10)
+    category = self.category
+    questions = self.questions
+    if category == EMPTY_STRING
+      questions = Question.all
+      return questions.sample(QUESTIONS_IN_A_BATTLE)
     else
-      self.questions = Question.where(area: self.category)
-      return self.questions.sample(10)
+      questions = Question.where(area: category)
+      return questions.sample(QUESTIONS_IN_A_BATTLE)
     end
   end
 
@@ -47,4 +51,3 @@ class Battle < ActiveRecord::Base
   end
 
 end
-

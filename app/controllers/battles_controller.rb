@@ -10,12 +10,12 @@ class BattlesController < ApplicationController
 
   include BattlesHelper
 
+  EMPTY_ARRAY = []
+
   before_action :authenticate_user
   before_action :verify_participation, only: [:show, :destroy]
   before_action :verify_all_played, only: [:result]
   before_action :verify_current_user_played, only: [:finish]
-
-  EMPTY_ARRAY = []
 
   # name: new
   # explanation: instantiates a new battle object
@@ -137,6 +137,7 @@ class BattlesController < ApplicationController
   # return: void
   def answer
     battle = Battle.find(params[:id])
+
     assert(battle.kind_of?(Battle))
 
     question_position = question_number(battle)
@@ -283,4 +284,3 @@ class BattlesController < ApplicationController
     render :text => random_user.nickname
   end
 end
-

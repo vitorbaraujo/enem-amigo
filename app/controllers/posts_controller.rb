@@ -18,6 +18,7 @@ class PostsController < ApplicationController
   # return: a post object
   def new
     @post = Post.new
+
     assert(@post.kind_of?(Post))
 
     return @post
@@ -30,6 +31,7 @@ class PostsController < ApplicationController
   # return: void
   def create
     @post = Post.new(post_params)
+
     assert(@post.kind_of?(Post))
 
     @post.user_id = current_user.id
@@ -50,6 +52,7 @@ class PostsController < ApplicationController
   # return: a post object as described above
   def show
     @post = Post.find(params[:id])
+
     assert(@post.kind_of?(Post))
 
     return @post
@@ -73,6 +76,7 @@ class PostsController < ApplicationController
   # return: a post object as described above
   def edit
     @post = Post.find(params[:post_id])
+
     assert(@post.kind_of?(Post))
 
     return @post
@@ -85,6 +89,7 @@ class PostsController < ApplicationController
   # return: void
   def update
     @post = Post.find(params[:post_id])
+
     assert(@post.kind_of?(Post))
 
     if @post.update_attributes(post_params)
@@ -102,6 +107,7 @@ class PostsController < ApplicationController
   # return: a string with the name of the user found
   def user_name(user_id)
     user = User.where(id: user_id).name
+
     assert(user.kind_of?(User))
 
     return user
@@ -115,7 +121,9 @@ class PostsController < ApplicationController
   # return: void
   def rate_post
     render nothing: true
+
     post = Post.find(params[:id])
+
     assert(@post.kind_of?(Post))
 
     if not post.user_ratings.include? current_user.id
@@ -133,6 +141,7 @@ class PostsController < ApplicationController
   # return: void
   def destroy
     @post = Post.find(params[:post_id])
+
     assert(@post.kind_of?(Post))
 
     @post.destroy
@@ -151,5 +160,5 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:content)
   end
-end
 
+end
