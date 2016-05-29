@@ -1,3 +1,11 @@
+# File: posts_controller.rb
+# Purpose: Implementation of the Posts Controller
+# License: LGPL. No copyright.
+
+# This controller contains the logic involving creating, reading, updating and
+# deleting posts linked to a single user. It also contains methods responsible
+# for manage the quantity of people who rated a single post
+
 class PostsController < ApplicationController
 
   before_action :authenticate_user
