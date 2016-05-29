@@ -1,3 +1,11 @@
+# File: post.rb
+# Purpose: Implementation of the class Post
+# License: LGPL. No copyright.
+
+# This class contains the core of a post section in the system. It contains
+# attributes to interact with user posts, in addition to manage how many posts a
+# user has
+
 class Post < ActiveRecord::Base
 
   has_many :comments
