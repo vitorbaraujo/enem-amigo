@@ -1,3 +1,11 @@
+# File: battles_controller.rb
+# Purpose: Implementation of the Battle Controller
+# License: LGPL. No copyright.
+
+# This controller contains the logic involving creating, reading, updating and
+# deleting battles between two users, in addition to manage the results of a
+# single battle
+
 class BattlesController < ApplicationController
 
   include BattlesHelper
