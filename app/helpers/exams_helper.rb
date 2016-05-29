@@ -1,3 +1,11 @@
+# File: exams_helper.rb
+# Purpose: Implementation of the Exams Helper
+# License: LGPL. No copyright.
+
+# This helper contains auxiliar methods to be used in the controller of the
+# exams to generate the questions for the new exam, in addition to check the
+# user answers to the exam
+
 module ExamsHelper
 
   BLANK_STRING = ""
