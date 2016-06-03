@@ -1,18 +1,24 @@
+<% NONE = 0 %>
+
 <% if @user_level != current_user.level %>
     <%= render partial: 'users/new_level.html.erb' %>
     <% update_user_level %>
+<% else %>
+  <!-- nothing to do -->
 <% end %>
 
 <div class="buttons-questions">
-  <% if current_user.role_admin? || current_user.id == @user.id %>
-    <%= link_to "Editar", edit_user_path, class: "btn btn-primary" %>
-    <%= link_to "Excluir", user_path, :method => :delete,  class: "btn btn-danger", data: { confirm: "Você tem certeza que deseja excluir seu usuário?" } %>
+  <% if(current_user.role_admin? || current_user.id == @user.id) %>
+    <%= link_to("Editar", edit_user_path, class: "btn btn-primary") %>
+    <%= link_to("Excluir", user_path, :method => :delete,  class: "btn btn-danger", data: { confirm: "Você tem certeza que deseja excluir seu usuário?" }) %>
+  <% else %>
+    <!-- nothing to do -->
   <% end %>
 </div>
 
 <h1><%= @user.name %></h1>
 
-<% unless @user.accepted_questions.blank? %>
+<% if !@user.accepted_questions.blank? %>
   <%= pie_chart @user.data, colors: ["red", "#0080FF" , "#009900", "#EEEE00"] %>
 <% else %>
   <h4 id="no-questions"><center>Você ainda não respondeu nenhuma questão</center></h4>
@@ -39,7 +45,7 @@
     <% @user.medals.reverse.take(4).each do |medal| %>
       <div class="col-sm-6 col-md-3">
         <div class="thumbnail" id="user_medals">
-          <%= image_tag medal.image %>
+          <%= image_tag(medal.image) %>
           <p class="medal_name">
             <b><%= medal.name %></b>
           </p>
@@ -60,21 +66,23 @@
     <%= @user.total_accepted_questions %>
   </p>
 
-  <% if @user.total_accepted_questions != 0 %>
+  <% if @user.total_accepted_questions != NONE %>
     <table class = 'table'>
       <thead>
         <th>Número</th>
         <th>Área</th>
         <th>Ano</th>
       </thead>
-      <% @user.accepted_questions.each do |a| %>
-        <% accepted = Question.find(a) %>
+      <% @user.accepted_questions.each do |right_question| %>
+        <% accepted = Question.find(right_question) %>
         <tbody>
-          <td><%= link_to "#{accepted.number}", "/questions/#{a}" %></td>
+          <td><%= link_to "#{accepted.number}", "/questions/#{right_question}" %></td>
           <td><%= accepted.area %></td>
           <td><%= accepted.year %></td>
         </tbody>
       <% end %>
     </table>
+  <% else %>
+    <!-- nothing to do -->
   <% end %>
 </div>
