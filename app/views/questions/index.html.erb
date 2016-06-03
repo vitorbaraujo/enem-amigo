@@ -1,8 +1,9 @@
 <h1> Lista de Questões </h1>
 
 <% if current_user.role_admin? %>
-	<%= link_to 'Novas Questões', new_question_path, class: "btn btn-success"  %>
+	<%= link_to ('Novas Questões', new_question_path, class: "btn btn-success")  %>
 <% end %>
+	<!-- nothing to do -->
 
 <% if !@questions.blank? %>
 	<table class='table'>
@@ -13,15 +14,16 @@
 			<th>Enunciado</th>
 		</thead>
 
-		<% @questions.each do |t| %>
+		<% @questions.each do |questions| %>
 			<tr>
-				<td class="align-center"><%= t.year %></td>
-				<td class="align-center"><%= link_to t.number, "/questions/#{t.id}" %></td>
-				<td><%= t.area %></td>
-				<td><%= truncate(t.enunciation, length: 180, separator: ' ') %></td>
+				<td class="align-center"><%= questions.year %></td>
+				<td class="align-center"><%= link_to (questions.number, "/questions/#{questions.id}") %></td>
+				<td><%= questions.area %></td>
+				<td><%= truncate(questions.enunciation, length: 180, separator: ' ') %></td>
 			</tr>
 		<% end %>
 	</table>
 <% else %>
 	<h3> Não há questões cadastradas no momento. </h3>
+
 <% end %>
