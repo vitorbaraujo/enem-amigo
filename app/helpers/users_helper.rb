@@ -1,6 +1,13 @@
+# File: users_helper.rb
+# Purpose: Maintain logic for users.
+# License: LGPL. No copyright.
+
+# This helper contains auxiliary methods to be used in the controller of ranking and level of the users. 
+
+
 module UsersHelper
 
- # name: new_post
+ # name: top10
  # explanation: this method the ten users with the highest score
  # parameters:
  # -none
@@ -10,7 +17,7 @@ module UsersHelper
     @top10 = ranking.take(10)
   end
 
- # name: new_post
+ # name: find_level
  # explanation: this method level of user without updating it
  # parameters:
  # -none
@@ -19,7 +26,7 @@ module UsersHelper
     @user_level = (Math.sqrt 2*user_points).to_i
   end
 
- # name: new_post
+ # name: update user level
  # explanation: this method update user level
  # parameters:
  # -none
