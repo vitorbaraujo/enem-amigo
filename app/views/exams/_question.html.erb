@@ -6,25 +6,27 @@
     <p><%= @question.area %></p>
   </div>
 
-  <% @question.texts.each do |t| %>
-    <h4 class="question-title"><%= t.title %></h4>
-    <% t.paragraphs.each do |p| %>
-      <p class="question-text"><%= p %></p>
+  <% @question.texts.each do |question| %>
+    <h4 class="question-title"><%= question.title %></h4>
+    <% question.paragraphs.each do |paragraphs| %>
+      <p class="question-text"><%= paragraphs %></p>
     <% end %>
-    <p class="question-text-reference"><%= t.reference %></p>
+    <p class="question-text-reference"><%= question.reference %></p>
   <% end %>
 
-  <% unless @question.image.empty? %>
+  <% if !@question.image.empty?%>
     <%= image_tag(@question.image , class: 'img-responsive question-img') %>
   <% end %>
+    <!-- nothing to do -->
 
   <p class="question"><%= @question.enunciation %></p>
 
-  <% @question.alternatives.each do |f| %>
+  <% @question.alternatives.each do |alternative| %>
     <div class="alternative">
-      <%= radio_button_tag(:"alternative_#{@question.id}", f.letter) %>
-      <%= label_tag(f.letter.to_s, f.letter.to_s + ")") %>
-      <%= f.description %>
+      <%= radio_button_tag(:"alternative_#{@question.id}", alternative.letter) %>
+      <%= label_tag(alternative.letter.to_s, alternative.letter.to_s + ")") %>
+      <%= alternative.description %>
     </div>
   <% end %>
+
 </div>
