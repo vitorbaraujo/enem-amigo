@@ -1,3 +1,9 @@
+# File: sessions_helper.rb
+# Purpose: Maintain logic for sessions.
+# License: LGPL. No copyright.
+
+# This helper contains auxiliary methods that be used to manage the login procedures. 
+
 module SessionsHelper
 
  # name: log_in
