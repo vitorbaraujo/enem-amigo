@@ -16,7 +16,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <% unless @user.medals.empty? %>
+          <% if !@user.medals.empty? %>
             <% @user.medals.each do |medal| %>
               <div class="col-sm-6 col-md-3">
                 <div class="thumbnail" id="user_medals">
@@ -31,8 +31,10 @@
               </div>
             <% end %>
           <% else %>
-            <% if @user.id == current_user.id %> Você
-            <% else %> <%= @user.name %>
+            <% if @user.id == current_user.id %>
+              Você
+            <% else %>
+              <%= @user.name %>
             <% end %>
             não tem nenhuma medalha
           <% end %>
