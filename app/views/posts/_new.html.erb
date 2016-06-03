@@ -1,3 +1,9 @@
+<!--
+ File: _new.html.erb
+ Purpose: Form to collect information to create a post
+ License : LGPL. No copyright.
+-->
+
 <%= form_for @post do |post_form| %>
   <%= post_form.text_area :content, class: 'form-control', placeholder: "Entre na discussão!" %>
   <span id="new-post-btn"><%= post_form.submit "Postar", class: 'btn btn-success col-md-2' %></span>
