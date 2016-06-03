@@ -1,11 +1,17 @@
 <h1 class="content-title">Enem Amigo</h1>
 
-<% if @new_medals.count > 0 %>
+<% NONE = 0 %>
+
+<% if @new_medals.count > NONE %>
   <%= render partial: '/medals/new_medal' %>
+<% else %>
+  <!-- Do nothing -->
 <% end %>
 <% if @user_level != current_user.level %>
     <%= render partial: 'users/new_level.html.erb' %>
     <% update_user_level %>
+<% else %>
+  <!-- Do nothing -->
 <% end %>
 
 <div id="user-progress"><h4>Meu Progresso</h4></div>
