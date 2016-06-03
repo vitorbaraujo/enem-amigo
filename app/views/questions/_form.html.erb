@@ -1,43 +1,44 @@
-<%= form_for(@question) do |f| %>
+<%= form_for(@question) do |form_for| %>
 
 	<div>
-		<%= f.label :year %>
-		<%= f.text_field :year %>
+		<%= form_for.label :year %>
+		<%= form_for.text_field :year %>
 	</div>
 	<div>
-		<%= f.label :area %>
+		<%= form_for.label :area %>
 		<%= f.text_field :area %>
 	</div>
 	<div>
-		<%= f.label :number %>
-		<%= f.text_field :number %>
+		<%= form_for.label :number %>
+		<%= form_for.text_field :number %>
 	</div>
 	<div>
-		<%= f.label :enunciation %>
-		<%= f.text_field :enunciation %>
+		<%= form_for.label :enunciation %>
+		<%= form_for.text_field :enunciation %>
 	</div>
 	<div>
-		<%= f.label :reference %>
-		<%= f.text_field :reference %>
+		<%= form_for.label :reference %>
+		<%= form_for.text_field :reference %>
 	</div>
 	<div>
-		<%= f.label :image %>
-		<%= f.text_field :image %>
+		<%= form_for.label :image %>
+		<%= form_for.text_field :image %>
 	</div>
 
-	<%= f.fields_for :alternatives do |ff| %>
+	<%= form_for.fields_for :alternatives do |fields_for| %>
 		<div>
-			<%= ff.label :letter %>
-			<%= ff.text_field :letter %>
+			<%= fields_for.label :letter %>
+			<%= fields_for.text_field :letter %>
 
-			<%= ff.label :description %>
-			<%= ff.text_field :description %>
+			<%= fields_for.label :description %>
+			<%= fields_for.text_field :description %>
 		</div>
 	<% end %>
 	<div>
-		<%= f.label :right_answer %>
-		<%= f.text_field :right_answer %>
+		<%= form_for.label :right_answer %>
+		<%= form_for.text_field :right_answer %>
 	</div>
 
-	<%= f.submit %>
+	<%= form_for.submit %>
+
 <% end %>
