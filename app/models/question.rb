@@ -1,3 +1,9 @@
+# File: question.rb
+# Purpose: Maintain logic for question.
+# License: LGPL. No copyright.
+
+# This class represents the information on question model
+
 class Question < ActiveRecord::Base
 
   before_save { self.area = area.mb_chars.downcase.to_s }
@@ -100,6 +106,8 @@ class Question < ActiveRecord::Base
  # explanation: this method calculates hit rate
  # parameters:
  # -none
+ 
+
  # return: question of enemamigo
     def method_missing method_name, *args
       method_name = method_name.to_s
