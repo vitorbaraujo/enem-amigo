@@ -1,8 +1,8 @@
 <p></p>
 <div class="buttons-questions">
   <% if current_user.role_admin? %>
-    <%= link_to "Editar", edit_question_path, class: "btn btn-primary", id: "btn-edit" %>
-    <%= link_to "Deletar", question_path, :method => :delete, class: "btn btn-danger", id: "btn-delete", data: { confirm: "Você tem certeza que deseja excluir esta questão?" } %>
+    <%= link_to ("Editar", edit_question_path, class: "btn btn-primary", id: "btn-edit") %>
+    <%= link_to ("Deletar", question_path, :method => :delete, class: "btn btn-danger", id: "btn-delete", data: { confirm: "Você tem certeza que deseja excluir esta questão?" }) %>
   <% end %>
 </div>
 
@@ -14,32 +14,33 @@
     <p><%= @question.area %></p>
   </div>
 
-  <% @question.texts.each do |t| %>
-    <h4 class="question-title"><%= t.title %></h4>
-    <% t.paragraphs.each do |p| %>
-      <p class="question-text"><%= p %></p>
+  <% @question.texts.each do |question| %>
+    <h4 class="question-title"><%= question.title %></h4>
+    <% question.paragraphs.each do |paragraphs| %>
+      <p class="question-text"><%= paragraphs %></p>
     <% end %>
-    <p class="question-text-reference"><%= t.reference %></p>
+    <p class="question-text-reference"><%= question.reference %></p>
   <% end %>
 
-  <% unless @question.image.empty? %>
-    <%= image_tag(@question.image , class: 'img-responsive question-img') %>
+  <% if !@ question.image.empty?%>
+    <%= image_tag (@question.image , class: 'img-responsive question-img') %>
   <% end %>
+    <!-- nothing to do -->
 
   <p class="question"><%= @question.enunciation %></p>
 
 
   <%= form_tag answer_question_path, remote: true do %>
-    <% @question.alternatives.each do |f| %>
+    <% @question.alternatives.each do |alternative| %>
       <div class="alternative">
-        <%= radio_button_tag(:alternative, f.letter) %>
-        <%= label_tag(f.letter.to_s, f.letter.to_s + ")") %>
-        <span class="<%= f.letter.to_s %>-description"><%= f.description %></span>
+        <%= radio_button_tag(:alternative, alternative.letter) %>
+        <%= label_tag(alternative.letter.to_s, alternative.letter.to_s + ")") %>
+        <span class="<%= alternative.letter.to_s %>-description"><%= alternative.description %></span>
       </div>
     <% end %>
 
-  <%= submit_tag "Responder", class: 'answer btn btn-primary btn-sm button', id: 'answer-btn' %>
-  <%= link_to "Pular", next_question_path, method: :post, class: 'btn btn-primary btn-sm button', id: 'jump-btn' %>
+  <%= submit_tag ("Responder", class: 'answer btn btn-primary btn-sm button', id: 'answer-btn') %>
+  <%= link_to ("Pular", next_question_path, method: :post, class: 'btn btn-primary btn-sm button', id: 'jump-btn') %>
 
   <% end %>
 
