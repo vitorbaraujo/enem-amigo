@@ -1,3 +1,11 @@
+<!--
+
+  File: _form.html.erb
+  Purpose: This View that shows the year, the number, the area, the image, the letter, right_answer and the wording of the question.
+  License : LGPL. No copyright.
+ 
+ -->
+
 <%= form_for(@question) do |form_for| %>
 
 	<div>
@@ -6,7 +14,7 @@
 	</div>
 	<div>
 		<%= form_for.label :area %>
-		<%= f.text_field :area %>
+		<%= form_for.text_field :area %>
 	</div>
 	<div>
 		<%= form_for.label :number %>
