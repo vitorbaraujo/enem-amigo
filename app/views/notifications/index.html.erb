@@ -1,6 +1,6 @@
 <h1> Notificações </h1>
 
-<% unless @notifications.blank? %>
+<% if !@notifications.blank? %>
   <table class='table'>
     <thead>
       <th class="align-center">Enviado por</th>
@@ -8,11 +8,11 @@
       <th class="align-center">Data</th>
     </thead>
 
-    <% @notifications.each do |t| %>
+    <% @notifications.each do |notification| %>
       <tr>
-        <td class="align-center"><%= t.sender %></td>
-        <td class="align-center"><%= link_to t.message, t.link %></td>
-        <td class="align-center"><%= t.created_at.strftime(" %d/%m/%Y") %></td>
+        <td class="align-center"><%= notification.sender %></td>
+        <td class="align-center"><%= link_to(notification.message, notification.link) %></td>
+        <td class="align-center"><%= notification.created_at.strftime(" %d/%m/%Y") %></td>
       </tr>
     <% end %>
   </table>

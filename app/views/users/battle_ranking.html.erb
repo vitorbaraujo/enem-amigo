@@ -12,7 +12,7 @@
     <% @users.each do |user| %>
     <tr>
         <td><%= i = i+1 %>º</td>
-        <td><%= link_to user.name, "/users/#{user.id}" %></td>
+        <td><%= link_to(user.name, "/users/#{user.id}") %></td>
         <td><%= user.battle_points %></td>
         <td><%= user.wins %></td>
     </tr>

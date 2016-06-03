@@ -1,17 +1,21 @@
 <h1>Medalhas</h1>
 
-<% if @new_medals.count > 0 %>
+<% NONE = 0 %>
+
+<% if @new_medals.count > NONE %>
   <%= render partial: 'new_medal' %>
+<% else %>
+  <!-- nothing to do -->
 <% end %>
 
-<% if current_user.medals.count > 0 %>
+<% if current_user.medals.count > NONE %>
   <p>Medalhas Conquistadas</p>
 
   <div class="row">
     <% current_user.medals.each do |medal| %>
       <div class="col-sm-6 col-md-3">
         <div class="thumbnail" id="user_medals">
-          <%= image_tag medal.image %>
+          <%= image_tag(medal.image) %>
           <p class="medal_name">
             <b><%= medal.name %></b>
           </p>
@@ -22,16 +26,19 @@
       </div>
     <% end %>
   </div>
+<% else %>
+  <!-- nothing to do -->
 <% end %>
 
-<% if @missing_medals.count > 0 %>
+<% if @missing_medals.count > NONE %>
+
   <p>Outras Medalhas</p>
 
   <div class="row">
     <% @missing_medals.each do |medal| %>
       <div class="col-sm-6 col-md-3">
         <div class="thumbnail" id="missing_medals">
-          <%= image_tag medal.image %>
+          <%= image_tag(medal.image) %>
           <p class="medal_name">
              ??????????
           </p>
@@ -46,4 +53,6 @@
     <% end %>
   </div>
 
+<% else %>
+  <!-- nothing to do -->
 <% end %>

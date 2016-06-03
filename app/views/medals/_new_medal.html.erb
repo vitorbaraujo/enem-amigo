@@ -1,4 +1,6 @@
-<% if @new_medals.count == 1 %>
+<% NEW_MEDAL = 1 %>
+
+<% if @new_medals.count == NEW_MEDAL %>
 <div id="new_medal_modal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -9,7 +11,7 @@
       <div class="modal-body">
         <% @new_medals.each do |medal| %>
           <div class="thumbnail" id="user_medals">
-            <%= image_tag medal.image %>
+            <%= image_tag(medal.image) %>
             <p class="medal_name">
               <b><%= medal.name %></b>
             </p>
@@ -38,7 +40,7 @@
           <% @new_medals.each do |medal| %>
             <div class="col-sm-4 col-md-6">
               <div class="thumbnail" id="user_medals">
-                <%= image_tag medal.image %>
+                <%= image_tag(medal.image) %>
                 <p class="medal_name">
                   <b><%= medal.name %></b>
                 </p>
