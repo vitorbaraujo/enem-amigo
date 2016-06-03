@@ -2,7 +2,9 @@
 # Purpose: Maintain logic for users.
 # License: LGPL. No copyright.
 
-# This controller contain general methods regarding users objects.
+# This controller contain general methods regarding users objects, including
+# actions to create, read, destroy, update users and create ranking for them,
+# as well as actions regarding profile image.
 
 class UsersController < ApplicationController
 
