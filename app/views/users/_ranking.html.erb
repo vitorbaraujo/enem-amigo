@@ -5,9 +5,9 @@
     </tr>
   </thead>
   <tbody>
-  <% top10.each do |x| %>
+  <% top10.each do |users| %>
     <tr>
-      <td><%= link_to x.name, "/users/#{x.id}" %></td>
+      <td><%= link_to(users.name, "/users/#{x.id}") %></td>
     </tr>
   <% end %>
   </tbody>
