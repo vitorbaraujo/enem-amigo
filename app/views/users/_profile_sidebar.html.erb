@@ -1,11 +1,17 @@
+<!--
+ File: _profile_sidebar.html.erb
+ Purpose: Sidebar of the system that shows basic informations about user
+ License : LGPL. No copyright.
+-->
+
 <div class="col-sm-3">
   <div class="profile-sidebar">
     <div class="profile-image">
-      <%= link_to image_tag(
+      <%= link_to(image_tag(
         if current_user.profile_image_file_name.blank?
-          "profiles_images/default"
+          "profiles_images/default"))
         else
-          current_user.profile_image.url, alt: "Profile image"), "/users/#{current_user.id}"
+          current_user.profile_image.url, alt: "Profile image"), "/users/#{current_user.id}")
         end %>
     </div>
     <div class="profile-information">
