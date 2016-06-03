@@ -1,3 +1,9 @@
+<!--
+ File: index.html.erb
+ Purpose: File that shows all battles of a user
+ License : LGPL. No copyright.
+-->
+
 <h1> Batalhas </h1>
 
 <table id="battle-options-table">
@@ -15,7 +21,7 @@
   </tr>
 </table>
 
-<% if not @pending_battles.blank? %>
+<% if !@pending_battles.blank? %>
   <br><br>
   <h2><b>Batalhas Pendentes</b></h2>
   <table class='table'>
@@ -44,7 +50,7 @@
   <!-- nothing to do -->
 <% end %>
 
-<% if not @waiting_battles.blank? %>
+<% if !@waiting_battles.blank? %>
   <br><br>
   <h2><b>Batalhas Abertas</b></h2>
   <table class='table'>
@@ -73,7 +79,7 @@
 <% end %>
 
 
-<% if not @finished_battles.blank? %>
+<% if !@finished_battles.blank? %>
   <br><br>
   <h2><b>Batalhas Finalizadas</b></h2>
   <table class='table'>
