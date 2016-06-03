@@ -1,3 +1,9 @@
+# File: exams_controller.rb
+# Purpose: Maintain logic for exams.
+# License: LGPL. No copyright.
+
+# This controller lists exams for the users answer.
+
 include ExamsHelper
 
 class ExamsController < ApplicationController
