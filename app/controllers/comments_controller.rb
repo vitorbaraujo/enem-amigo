@@ -1,3 +1,11 @@
+# File: comments_controller.rb
+# Purpose: Controller of comments. 
+# License : LGPL. No copyright.
+
+# This controller creates, delete and edit a comment,
+# control the rates,
+# and require params of comments.
+
 class CommentsController < ApplicationController
 
   before_action :authenticate_user
