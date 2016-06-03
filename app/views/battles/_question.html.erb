@@ -1,35 +1,40 @@
 <div class="question">
-  <h1>Questão <%= @question.number%></h1>
+  <h1>Questão <%= @question.number %></h1>
   <h2>Ano: <%= @question.year %></h2>
 
   <div class='question-index'>
     <p><%= @question.area %></p>
   </div>
 
-  <% @question.texts.each do |t| %>
-    <h4 class="question-title"><%= t.title %></h4>
-    <% t.paragraphs.each do |p| %>
-      <p class="question-text"><%= p %></p>
+  <% @question.texts.each do |text| %>
+    <h4 class="question-title"><%= text.title %></h4>
+
+    <% text.paragraphs.each do |paragraph| %>
+      <p class="question-text"><%= paragraph %></p>
     <% end %>
-    <p class="question-text-reference"><%= t.reference %></p>
+
+    <p class="question-text-reference"><%= text.reference %></p>
   <% end %>
 
-  <% unless @question.image.empty? %>
+  <% if @question.image.empty? %>
+    <!-- nothing to do -->
+  <% else %>
     <%= image_tag(@question.image , class: 'img-responsive question-img') %>
   <% end %>
 
   <p class="question"><%= @question.enunciation %></p>
 
   <%= form_tag answer_battle_path, remote: true do %>
-    <% @question.alternatives.each do |f| %>
+    <% @question.alternatives.each do |alternative| %>
       <div class="alternative">
-        <%= radio_button_tag(:alternative, f.letter) %>
-        <%= label_tag(f.letter.to_s, f.letter.to_s + ")") %>
-        <span class="<%= f.letter.to_s %>-description"><%= f.description %></span>
+        <%= radio_button_tag(:alternative, alternative.letter) %>
+        <% alternative_letter_show = alternative.letter.to_s + ")" %>
+        <%= label_tag(alternative.letter.to_s, alternative_letter_show) %>
+        <span class="<%= alternative.letter.to_s %>-description"><%= alternative.description %></span>
       </div>
     <% end %>
-    <%= submit_tag "Responder", class: 'btn btn-primary btn-sm button', id: 'answer-btn' %>
 
+    <%= submit_tag "Responder", class: 'btn btn-primary btn-sm button', id: 'answer-btn' %>
   <% end %>
 
 </div>
