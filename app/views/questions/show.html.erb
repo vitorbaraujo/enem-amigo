@@ -1,9 +1,19 @@
+<!--
+
+  File: recommended.erb
+  Purpose: This View that show the user performance at question.
+  License : LGPL. No copyright.
+ 
+ -->
+
 <p></p>
+
 <div class="buttons-questions">
   <% if current_user.role_admin? %>
     <%= link_to ("Editar", edit_question_path, class: "btn btn-primary", id: "btn-edit") %>
     <%= link_to ("Deletar", question_path, :method => :delete, class: "btn btn-danger", id: "btn-delete", data: { confirm: "Você tem certeza que deseja excluir esta questão?" }) %>
   <% end %>
+
 </div>
 
 <div class="question">
@@ -19,12 +29,15 @@
     <% question.paragraphs.each do |paragraphs| %>
       <p class="question-text"><%= paragraphs %></p>
     <% end %>
+    
     <p class="question-text-reference"><%= question.reference %></p>
   <% end %>
 
   <% if !@ question.image.empty?%>
     <%= image_tag (@question.image , class: 'img-responsive question-img') %>
   <% end %>
+
+    <%else%>
     <!-- nothing to do -->
 
   <p class="question"><%= @question.enunciation %></p>
@@ -54,6 +67,7 @@
             title: 'Desempenho da Questão  (Porcentagem de acertos por tentativa)',
 
   } %>
+
 </p>
 
 </div>
