@@ -1,3 +1,10 @@
+# File: questions_controller.rb
+# Purpose: Maintain logic for questions.
+# License: LGPL. No copyright.
+
+# This controller sets the behavior for showing questons to user.
+
+
 class QuestionsController < ApplicationController
 
   before_action :authenticate_user
