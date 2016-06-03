@@ -1,4 +1,4 @@
-<%= form_for(@battle) do |f| %>
+<%= form_for(@battle) do |battle_form| %>
   <h3>Escolha a categoria</h3>
 
   <table class="battle-categories">
@@ -42,29 +42,34 @@
 
   <div class="row">
     <div class="col-md-4 opponent-container">
-    <%= f.label :player_2_nickname, "Escolher adversário" %>
+    <%= battle_form.label :player_2_nickname, "Escolher adversário" %>
     <%= text_field_tag :player_2_nickname, params[:player_2_nickname], id: 'deviceIDfield' %>
     </div>
     <div class="col-md-4 or-container">
       <span id="or">ou</span>
     </div>
     <div class="col-md-4 random-opponent-container">
-    <%= f.button "Usuário Aleatório", id: 'deviceIDbutton', class: 'btn btn-success' %>
+    <%= battle_form.button "Usuário Aleatório", id: 'deviceIDbutton', class: 'btn btn-success' %>
     </div>
   </div>
 
-  <%= f.select :category, ([['Geral',''] , ['Matemática','matemática e suas tecnologias'] , ['Ciências da Natureza','ciências da natureza e suas tecnologias'] , ['Ciências Humanas','ciências humanas e suas tecnologias'] , ['Códigos e Linguagens','linguagens, códigos e suas tecnologias']]) %>
+  <%= battle_form.select :category, ([['Geral',''] , ['Matemática','matemática e suas tecnologias'] , ['Ciências da Natureza','ciências da natureza e suas tecnologias'] , ['Ciências Humanas','ciências humanas e suas tecnologias'] , ['Códigos e Linguagens','linguagens, códigos e suas tecnologias']]) %>
 
-  <%= f.submit "Criar", class: 'btn btn-primary battle-submit' %>
+  <%= battle_form.submit "Criar", class: 'btn btn-primary battle-submit' %>
 <% end %>
 
 <script type="text/javascript">
+
   $(function(){
+
     $("#deviceIDbutton").click(function(e){
+
       $.get("/generate_random_user", function(data){
         $("#deviceIDfield").val(data);
       });
+
       e.preventDefault();
+
     })
 
     $(".click").click(function(e) {
@@ -88,5 +93,7 @@
           $(".general-inf").css("border-bottom", "1px solid #2ECC71");
       }
     });
+
   })
+
 </script>

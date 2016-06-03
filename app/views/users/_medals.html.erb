@@ -1,3 +1,9 @@
+<!--
+ File: _medals.html.erb
+ Purpose: Shows a user's medal
+ License : LGPL. No copyright.
+-->
+
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#medal_modal">Medalhas</button>
 
 <div id="medal_modal" class="modal fade" role="dialog">
@@ -20,7 +26,7 @@
             <% @user.medals.each do |medal| %>
               <div class="col-sm-6 col-md-3">
                 <div class="thumbnail" id="user_medals">
-                  <%= image_tag medal.image %>
+                  <%= image_tag(medal.image) %>
                   <p class="medal_name">
                     <b><%= medal.name %></b>
                   </p>

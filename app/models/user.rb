@@ -3,7 +3,8 @@
 # License : LGPL. No copyright.
 
 # The class user is the main class of the system, because it contains
-# all information about one's progress in the website
+# all information about one's progress in the website, in example place in
+# ranking, number of right questions, etc
 
 class User < ActiveRecord::Base
 
@@ -175,9 +176,14 @@ class User < ActiveRecord::Base
   def classification(area)
     performance = self.average_performance area
     performance *= 100
-    if performance >= 0 && performance <= 30
+
+    NONE = 0
+    BEGGINER = 30
+    INTERMEDIATE = 60
+
+    if performance >= NONE && performance <= BEGGINER
      return "beginner"
-    elsif performance > 30 && performance <= 60
+   elsif performance > BEGGINER && performance <= INTERMEDIATE
      return "intermediate"
     else
      return "advanced"

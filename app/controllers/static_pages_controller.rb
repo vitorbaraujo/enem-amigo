@@ -2,7 +2,8 @@
 # Purpose: Maintain logic for static pages.
 # License: LGPL. No copyright.
 
-# This controller contain actions to redirect to certain views in system
+# This controller contain actions to redirect to certain views in system, like
+# home, about, help and server error.
 
 class StaticPagesController < ApplicationController
 

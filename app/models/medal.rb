@@ -2,7 +2,8 @@
 # Purpose: Implementation of the class Medal
 # License: LGPL. No copyright.
 
-# This class represents the recognition by the system of the user's advance.
+# This class represents the recognition by the system of the user's advance,
+# including actions to check valid returns
 
 class Medal < ActiveRecord::Base
 

@@ -1,3 +1,7 @@
+<!-- File: new.html.erb 
+Purpose: View of create a comment. 
+License : LGPL. No copyright. -->
+
 <%= form_tag "/posts/:post_id/comments", method: :post do %>
 	<%= text_area_tag :content %>
 	<% session[:post_id] = params["post_id"] %>

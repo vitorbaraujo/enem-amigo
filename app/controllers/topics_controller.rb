@@ -1,3 +1,10 @@
+# File: topics_controller.rb
+# Purpose: Controller of topics. 
+# License : LGPL. No copyright.
+
+# This controller creates and shows a topic
+# and require params of topics.
+
 class TopicsController < ApplicationController
 
 	include PostsHelper
