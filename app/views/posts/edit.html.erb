@@ -1,3 +1,9 @@
+<!--
+ File: edit.html.erb
+ Purpose: Form to collect information to edit a post
+ License : LGPL. No copyright.
+-->
+
 <%= form_for @post, url: { action: "update", id: current_user.id, post_id: @post.id } do |post_form| %>
 	<%= post_form.label :content, "Edite aqui seu post" %>
 	<%= post_form.text_area :content, class: 'form-control' %>
