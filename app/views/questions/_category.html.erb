@@ -1,4 +1,13 @@
+<!--
+
+  File: _category.html.erb
+  Purpose: This View that shows the year, the number and the wording of the question.
+  License : LGPL. No copyright.
+ 
+ -->
+
 <% if !@questions.blank? %>
+
   <table class='table'>
 
     <thead>
@@ -14,9 +23,12 @@
         <td><%= link_to (questions.number, "/questions/#{t.id}") %></td>
         <td><%= questions.enunciation %></td>
       </tr>
+      
     <% end %>
   </table>
-<% else %>
+
+<% else %> 
+  <!-- nothing to do -->
 
   <h3> Não existem recomendações de questões no momento. </h3>
 
