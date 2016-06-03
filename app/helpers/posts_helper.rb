@@ -1,3 +1,9 @@
+# File: posts_helper.rb
+# Purpose: Maintain logic for posts.
+# License: LGPL. No copyright.
+
+# This helper contains auxiliary methods to be used in the controller of new posts. 
+
 module PostsHelper
 
  # name: new_post
