@@ -19,6 +19,7 @@ class Comment < ActiveRecord::Base
   # return: amout of user ratings
 
 	def count_comment_rates
-    return self.user_ratings.count
+    ratings_count = self.user_ratings.count
+    return ratings_count
   end
 end
