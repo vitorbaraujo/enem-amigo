@@ -1,4 +1,13 @@
+<!--
+ 
+   File: question.erb
+   Purpose: This View that show the question the exam.
+   License : LGPL. No copyright.
+  
+ -->
+
 <div class="question">
+
   <h1>Questão <%= @question.number%></h1>
   <h2>Ano: <%= @question.year %></h2>
 
@@ -16,8 +25,11 @@
 
   <% if !@question.image.empty?%>
     <%= image_tag(@question.image , class: 'img-responsive question-img') %>
+
   <% end %>
-    <!-- nothing to do -->
+
+    <%else%>
+      <!-- nothing to do -->
 
   <p class="question"><%= @question.enunciation %></p>
 
@@ -27,6 +39,7 @@
       <%= label_tag(alternative.letter.to_s, alternative.letter.to_s + ")") %>
       <%= alternative.description %>
     </div>
+
   <% end %>
 
 </div>
