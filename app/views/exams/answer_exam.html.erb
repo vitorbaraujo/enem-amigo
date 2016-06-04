@@ -1,3 +1,11 @@
+<!--
+ 
+   File: answer_exam.erb
+   Purpose: This View that show the answer the exam, when the user submit the exam.
+   License : LGPL. No copyright.
+  
+ -->
+
 <div class="glyphicon glyphicon-time label label-default" id="counter"></div>
 
 <%= form_tag "/exam_result", method: :get do %>
@@ -6,10 +14,12 @@
     <% @question = Question.find(exam) %>
     <%= render :partial => 'question' %>
   <% end %>
+
   <div class="submit-exam">
     <p><%= submit_tag ("Submeter Prova", class: "btn btn-primary", id: "submit-exam-button") %>
     <%= link_to ("Cancelar Prova", cancel_exam_path(exam_id: @exam.id), data: { confirm: "Você tem certeza? Esse exame será perdido" }, method: :delete, class: "btn btn-danger", id: "cancel-exam") %></p>
   </div>
+
 <% end %>
 
 <script>
