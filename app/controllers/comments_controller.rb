@@ -29,6 +29,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+
     @comment.user_id = current_user.id
     @comment.post_id = params[:post_id]
 
@@ -38,7 +39,8 @@ class CommentsController < ApplicationController
     else
       return redirect_to (new_post_comment_path(params[:post_id]))
     end
-    end
+
+  end
 
   # name: edit
   # explanation: find a comment to update
@@ -47,7 +49,8 @@ class CommentsController < ApplicationController
   # return: a comment object
 
   def edit
-    return @comment = Comment.find(params[:comment_id])
+    @comment = Comment.find(params[:comment_id])
+    return @comment
   end
 
   # name: update
@@ -76,6 +79,7 @@ class CommentsController < ApplicationController
 
   def rate_comment
     render nothing: true
+
     comment = Comment.find(params[:id])
 
     if !(comment.user_ratings.include? current_user.id)
@@ -96,7 +100,9 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:comment_id])
     @comment.destroy
+
     flash[:success] = "Comentário deletado com sucesso"
+
     return redirect_to (Topic.find(session[:topic_id]))
   end
 
@@ -107,7 +113,8 @@ class CommentsController < ApplicationController
   # return: comment object
 
   def show
-    return @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:id])
+    return @comment
   end
 
   private
@@ -123,3 +130,6 @@ class CommentsController < ApplicationController
   end
 
 end
+
+
+
