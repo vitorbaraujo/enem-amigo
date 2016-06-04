@@ -1,3 +1,11 @@
+<!--
+ 
+   File: select_exam.erb
+   Purpose: This View that show the exam simulation, when the user requests this option.
+   License : LGPL. No copyright.
+  
+ -->
+
 <h1 class="content-title">Simulação de Prova</h1>
 
 <center>
@@ -7,6 +15,7 @@
     <div id="select-year-exam"><h2 class="form-title">Escolha um ano</h2></div>
     <%= select_tag :year_exam, options_for_select((2009..2015).to_a.collect { |year_exam| year_exam.to_s }), class: 'form-control' %>
     <%= submit_tag ('Responder Prova', class: 'btn btn-primary btn-sm') %>
+    
   <% end %>
 
 </center>
