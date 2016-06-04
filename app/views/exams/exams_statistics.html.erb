@@ -1,3 +1,11 @@
+<!--
+ 
+   File: exam_statistic.erb
+   Purpose: This View show information statistic of the exam from the results of the questions answered by user.
+   License : LGPL. No copyright.
+  
+ -->
+
 <h1 class="content-title">Estatísticas do Modo Prova</h1>
 
 <table class="table" id="complete-result">
@@ -15,4 +23,5 @@
 </table>
 
 <h2 id="accepted-by-exam">Questões acertadas por prova</h2>
+
 <%= area_chart current_user.exam_performance.each_with_index.map { |value,index| [index+1,value] }, discrete: true, library: { hAxis: { title: "Prova" }, vAxis: { title: "Questões respondidas" } } %>
