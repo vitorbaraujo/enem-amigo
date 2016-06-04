@@ -2,7 +2,7 @@
 # Purpose: Helper of Application. 
 # License : LGPL. No copyright.
 
-# The application helper has one method to 
+# The apsplication helper has one method to 
 # define the tittle of home page.
 
 module ApplicationHelper
