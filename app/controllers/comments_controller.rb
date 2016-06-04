@@ -18,7 +18,11 @@ class CommentsController < ApplicationController
   # return: a comment object
 
   def new
-    return @comment = Comment.new
+    @comment = Comment.new
+
+    assert(@comment.kind_of?(Comment))
+
+    return @comment
   end
 
   # name: create
@@ -30,8 +34,15 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
 
+    assert(@comment.kind_of?(Comment))
+
     @comment.user_id = current_user.id
+
+    assert(@comment.user_id.kind_of?(Comment))
+
     @comment.post_id = params[:post_id]
+
+    assert(@comment.post_idkind_of?(Comment))
 
     if @comment.save
       flash[:success] = "Seu comentário foi criado com sucesso"
@@ -50,6 +61,9 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:comment_id])
+    
+    assert(@comment.kind_of?(Comment))
+
     return @comment
   end
 
@@ -61,6 +75,8 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:comment_id])
+
+    assert(@comment.kind_of?(Comment))
 
     if @comment.update_attributes(comment_params)
       flash[:success] = "Seu comentário foi atualizado com sucesso"
@@ -82,6 +98,8 @@ class CommentsController < ApplicationController
 
     comment = Comment.find(params[:id])
 
+    assert(comment.kind_of?(Comment))
+
     if !(comment.user_ratings.include? current_user.id)
       comment.user_ratings.push(current_user.id)
       return comment.save
@@ -98,7 +116,10 @@ class CommentsController < ApplicationController
   # return: topic 
 
   def destroy
-    @comment = Comment.find(params[:comment_id])
+    @comment = Comment.find(params[:comment_id
+
+    assert(@comment.kind_of?(Comment))
+
     @comment.destroy
 
     flash[:success] = "Comentário deletado com sucesso"
