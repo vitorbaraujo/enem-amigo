@@ -1,3 +1,10 @@
+# File: application_helper.rb
+# Purpose: Helper of Application. 
+# License : LGPL. No copyright.
+
+# The application helper has one method to 
+# define the tittle of home page.
+
 module ApplicationHelper
 
 	PAGE_TITLE = ''
