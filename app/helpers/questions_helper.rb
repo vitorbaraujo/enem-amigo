@@ -49,8 +49,9 @@ module QuestionsHelper
             language_choice = enem_feedback.slice!(0).to_i
             enem_feedback.slice!(95 - (5 * language_choice), 5)
             student_hits = 0
+            i = 0
 
-             for i in 0...NUMBER_OF_QUESTIONS_IN_A_EXAM
+            for i in 0...NUMBER_OF_QUESTIONS_IN_A_EXAM
               question = Question.where(number: i, year: test_year).take
 
               if !question.nil?
@@ -109,6 +110,11 @@ module QuestionsHelper
 				return new_topic
 			end
 
+      # name: create_text
+      # explanation: creates a text with given json hash
+      # parameters:
+      # - text: hash extracted from a json file
+      # return: object of type Text
       def create_text(text)
         new_text = Text.new(title: text["title"], paragraphs: text["paragraphs"], reference: text["reference"])
 
@@ -129,12 +135,22 @@ module QuestionsHelper
         return student_response
       end
 
+      # name: regex_to_find_enem_feedback
+      # explanation: use a regex to find enem feedback of a json line
+      # parameters:
+      # - line: line of the json file
+      # return: hash
       def regex_to_find_enem_feedback(line)
         enem_feedback = line[/(0|1){1}(A|B|C|D|E){185}/, 0]
 
         return enem_feedback
       end
 
+      # name: regex_to_find_test_booklet_types
+      # explanation: use a regex to find test booklet types of a json line
+      # parameters:
+      # - line: line of the json file
+      # return: hash
       def regex_to_find_test_booklet_types(line)
         test_booklet_types = line[/[0-9]{13}(A|B|C|D|E){185}/, 0]
 
