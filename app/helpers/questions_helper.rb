@@ -48,24 +48,20 @@ module QuestionsHelper
             enem_feedback.slice!(95 - (5 * language_choice), 5)
             student_hits = 0
 
-            180.times do |i|
+             for i in 0...NUMBER_OF_QUESTIONS_IN_A_EXAM
               question = Question.where(number: i, year: test_year).take
+              
+              if !question.nil?
+                if student_responses[i] == enem_feedback[i]
+                  student_hits = student_hits + 1
+                  question.hits = question.hits + 1
+                end
 
-              if question.nil?
-                next
+                question.tries = question.tries + 1
+                question.save
               else
                 # nothing to do
               end
-
-              if student_responses[i] == enem_feedback[i]
-                student_hits += 1
-                question.hits += 1
-              else
-                #nothing to do
-              end
-
-              question.tries += 1
-              question.save
             end
 
               create_candidate(student_hits)
