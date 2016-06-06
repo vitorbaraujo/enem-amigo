@@ -13,6 +13,11 @@ class NotificationsController < ApplicationController
   # return: notifications from user
   def index
     @notifications = current_user.notifications.reverse
+
+    @notifications.each do |notification|
+      assert(notification.kind_of?(Notification))
+    end
+
     return @notifications
   end
 
@@ -25,7 +30,9 @@ class NotificationsController < ApplicationController
     render(:nothing => true)
     @notifications = current_user.notifications.where(visualized: false)
     @notifications.each do |notification|
+
       assert(notification.kind_of?(Notification))
+
       notification.update_attribute(:visualized, true)
     end
   end

@@ -16,7 +16,9 @@ class StaticPagesController < ApplicationController
   # return: level from user
   def home
     check_medals()
+
     assert(current_user.kind_of?(User))
+    
     return find_level(current_user.points)
   end
 

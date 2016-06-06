@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   def new
     @home_page = true
     @user = User.new
+
     assert(@user.kind_of?(User))
 
     if logged_in?
@@ -35,7 +36,9 @@ class UsersController < ApplicationController
   # return: returns the user found
   def edit
     @user = User.find(params[:id])
+
     assert(@user.kind_of?(User))
+
     return @user
   end
 
@@ -45,6 +48,8 @@ class UsersController < ApplicationController
   # - none
   # return: redirection to login
   def destroy
+    assert(params[:id].kind_of?(Fixnum))
+
     @user = User.find(params[:id])
     @user.destroy
     flash[:success] = "Usuário foi deletado"
@@ -57,8 +62,12 @@ class UsersController < ApplicationController
   # - none
   # return: Because of view, will redirect to a page with user's info
   def show
+    assert(params[:id].kind_of?(Fixnum))
+
     @user = User.find(params[:id])
+
     assert(@user.kind_of?(User))
+
     return find_level(current_user.points)
   end
 
@@ -68,6 +77,8 @@ class UsersController < ApplicationController
   # - none
   # return: redirect's to homepage if success
   def create
+    assert(!user_params.nil?)
+
     @user = User.new(user_params)
 
     if @user.save
@@ -87,8 +98,12 @@ class UsersController < ApplicationController
   # - none
   # return: redirection to user's page
   def update
+    assert(params[:id].kind_of?(Fixnum))
+
     @user = User.find(params[:id])
+
     assert(@user.kind_of?(User))
+
     if @user.update_attributes(user_params)
       flash[:success]= "Usuário atualizado"
       return redirect_to(@user)

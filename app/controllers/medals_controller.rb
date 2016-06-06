@@ -15,8 +15,19 @@ class MedalsController < ApplicationController
   # return: medals a user doesn't have
   def index
     check_medals()
+
     assert(current_user.kind_of?(User))
+
     @missing_medals = @medals - current_user.medals
+
+    if @missing_medals != 0
+      @missing_medals.each do |medal|
+        assert(medal.kind_of?(Medal))
+      end
+    else
+      # nothing to do
+    end
+
     return @missing_medals
   end
 

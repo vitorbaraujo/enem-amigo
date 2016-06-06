@@ -81,6 +81,15 @@ module QuestionsHelper
           Candidate.create(general_average: (100 * student_hits.to_f / 180).round(2))
         end
       end
+
+			def create_topic(system_question)
+				topic_name = "Questão #{system_question.number} - Ano #{system_question.year}"
+				topic_deion = "Dúvidas e respostas sobre a questão #{system_question.number} da prova do ano #{system_question.year}"
+
+				new_topic = Topic.create(name: topic_name, question_id: system_question.id, deion: topic_deion)
+
+				return new_topic
+			end
     end
   end
 
