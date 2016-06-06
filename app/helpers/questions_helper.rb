@@ -101,6 +101,11 @@ module QuestionsHelper
         end
       end
 
+      # name: create_topic
+      # explanation: creates a topic for a question in the system
+      # parameters:
+      # - system_question: a question from the system
+      # return: topic
 			def create_topic(system_question)
 				topic_name = "Questão #{system_question.number} - Ano #{system_question.year}"
 				topic_deion = "Dúvidas e respostas sobre a questão #{system_question.number} da prova do ano #{system_question.year}"
@@ -121,6 +126,12 @@ module QuestionsHelper
         return new_text
       end
 
+      # name: create candidate
+      # explanation: creates a candidate based on a real candidate of ENEM with
+      # a average of questions hit
+      # parameters:
+      # - student_hits: questions a real candidate got right
+      # return: Candidate
       def create_candidate(student_hits)
         average = (100 * student_hits.to_f / 180).round(2)
 
@@ -129,6 +140,12 @@ module QuestionsHelper
         return Candidate
       end
 
+      # name: regex_to_find_student_response
+      # explanation: use a regex to find a response from a real student in a json
+      # file
+      # parameters:
+      # - line: line of the json file
+      # return: hash
       def regex_to_find_student_response(line)
         student_response = line[/(A|B|C|D|E|'*'){180}/, 0]
 
