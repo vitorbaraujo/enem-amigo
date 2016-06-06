@@ -82,6 +82,21 @@ module QuestionsHelper
         end
       end
 
+
+      # name: create_alternatives
+      # explanation: creates alternatives for questions for user  the system
+      # questions.
+      # parameters:
+      # -candidates_data: a JSON file with a JSON file with alternatives for questions for user  the system
+      # return: none
+       def create_alternatives(system_question)
+        5.times do |i|
+          system_question.alternatives.build
+          system_question.alternatives[i].letter = value.keys[i]
+          system_question.alternatives[i].deion = value[value.keys[i]]
+        end
+      end
+
 			def create_topic(system_question)
 				topic_name = "Questão #{system_question.number} - Ano #{system_question.year}"
 				topic_deion = "Dúvidas e respostas sobre a questão #{system_question.number} da prova do ano #{system_question.year}"
