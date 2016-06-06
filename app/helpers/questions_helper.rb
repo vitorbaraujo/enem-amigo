@@ -28,7 +28,7 @@ module QuestionsHelper
         topic_for_system_question = create_topic(system_question)
       end
     end
-     
+
       # name: read_candidates_data
       # explanation: method to create info about real student's performance in
       # questions.
@@ -50,7 +50,7 @@ module QuestionsHelper
 
              for i in 0...NUMBER_OF_QUESTIONS_IN_A_EXAM
               question = Question.where(number: i, year: test_year).take
-              
+
               if !question.nil?
                 if student_responses[i] == enem_feedback[i]
                   student_hits = student_hits + 1
@@ -112,6 +112,20 @@ module QuestionsHelper
         new_text = Text.new(title: text["title"], paragraphs: text["paragraphs"], reference: text["reference"])
 
         return new_text
+      end
+
+      def create_candidate(student_hits)
+        average = (100 * student_hits.to_f / 180).round(2)
+
+        Candidate.create(general_average: average)
+
+        return Candidate
+      end
+
+      def regex_to_find_student_response(line)
+        student_response = line[/(A|B|C|D|E|'*'){180}/, 0]
+
+        return student_response
       end
     end
   end
