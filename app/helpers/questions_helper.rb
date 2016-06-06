@@ -51,23 +51,36 @@ module QuestionsHelper
             student_hits = 0
             i = 0
 
-            for i in 0...NUMBER_OF_QUESTIONS_IN_A_EXAM
-              question = Question.where(number: i, year: test_year).take
-
-              if !question.nil?
-                if student_responses[i] == enem_feedback[i]
-                  student_hits = student_hits + 1
-                  question.hits = question.hits + 1
-                end
-
-                question.tries = question.tries + 1
-                question.save
-              else
-                # nothing to do
-              end
-            end
+            parse_questions_response(test_year, student_hits, enem_feedback, students_responses)
 
             create_candidate(student_hits)
+          else
+            # nothing to do
+          end
+        end
+      end
+
+      # name: parse_questions_response
+      # explanation: method to create info about real student's tries and accepted
+      # answers.
+      # parameters:
+      # - test_year: the year of the exam
+      # - enem_feedback: questions of ENEM
+      # - student_hits: number of questions a student got right
+      # - students_responses: questions a student tried to answer
+      # return: void
+      def parse_questions_response(test_year, student_hits, enem_feedback, students_responses)
+        for i in 0...NUMBER_OF_QUESTIONS_IN_A_EXAM
+          question = Question.where(number: i, year: test_year).take
+
+          if !question.nil?
+            if student_responses[i] == enem_feedback[i]
+              student_hits = student_hits + 1
+              question.hits = question.hits + 1
+            end
+
+            question.tries = question.tries + 1
+            question.save
           else
             # nothing to do
           end
