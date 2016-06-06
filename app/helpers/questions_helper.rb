@@ -29,20 +29,6 @@ module QuestionsHelper
       end
     end
      
-    def parse_system_question(attribute, value)
-      if attribute == "text"
-        value.each do |text|
-          new_text = create_text(text) 
-          system_question.texts << new_text
-        end
-      elsif attribute == "alternatives"
-        create_alternatives(system_question)
-      else
-        eval "system_question.#{attr} = value"
-      end
-    end
-
-
       # name: read_candidates_data
       # explanation: method to create info about real student's performance in
       # questions.
@@ -82,6 +68,18 @@ module QuestionsHelper
         end
       end
 
+      def parse_system_question(attribute, value)
+        if attribute == "text"
+          value.each do |text|
+            new_text = create_text(text)
+            system_question.texts << new_text
+          end
+        elsif attribute == "alternatives"
+          create_alternatives(system_question)
+        else
+          eval "system_question.#{attr} = value"
+        end
+      end
 
       # name: create_alternatives
       # explanation: creates alternatives for questions for user  the system
@@ -105,7 +103,12 @@ module QuestionsHelper
 
 				return new_topic
 			end
+
+      def create_text(text)
+        new_text = Text.new(title: text["title"], paragraphs: text["paragraphs"], reference: text["reference"])
+
+        return new_text
+      end
     end
   end
-
 end
