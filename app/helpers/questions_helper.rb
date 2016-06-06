@@ -14,30 +14,34 @@ module QuestionsHelper
     # parameters:
     # -json_questions: A JSON file with questions from exam
     # return: none
-      def read_questions(json_questions)
-        questions = JSON.parse(json_questions)["questions"]
-        questions.each do |question|
-          system_question = Question.new
-          question.each do |attr, value|
-            if attr == "text"
-              value.each do |text|
-                system_question.texts << Text.new(title: text["title"], paragraphs: text["paragraphs"],
-                                    reference: text["reference"])
-              end
-            elsif attr == "alternatives"
-              5.times do |i|
-                system_question.alternatives.build
-                system_question.alternatives[i].letter = value.keys[i]
-                system_question.alternatives[i].description = value[value.keys[i]]
-              end
-            else
-              eval "system_question.#{attr} = value"
-            end
-          end
-          system_question.save
-          topic_for_system_question = Topic.create(name: "Questão #{system_question.number} - Ano #{system_question.year}", question_id: system_question.id, description: "Dúvidas e respostas sobre a questão #{system_question.number} da prova do ano #{system_question.year}")
+    def read_questions(json_questions)
+      questions = JSON.parse(json_questions)["questions"]
+
+      questions.each do |question|
+        system_question = Question.new
+
+        question.each do |attr, value|
+          parse_system_question(attribute, value)
         end
+
+        system_question.save
+        topic_for_system_question = create_topic(system_question)
       end
+    end
+     
+    def parse_system_question(attribute, value)
+      if attribute == "text"
+        value.each do |text|
+          new_text = create_text(text) 
+          system_question.texts << new_text
+        end
+      elsif attribute == "alternatives"
+        create_alternatives(system_question)
+      else
+        eval "system_question.#{attr} = value"
+      end
+    end
+
 
       # name: read_candidates_data
       # explanation: method to create info about real student's performance in
