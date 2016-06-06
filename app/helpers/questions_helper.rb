@@ -38,33 +38,41 @@ module QuestionsHelper
       # return: none
       def read_candidates_data(candidates_data, test_year)
         candidates_data.each_line do |line|
-          if line == "\n"
-            next
+          if line != "\n"
+            student_responses = regex_to_find_student_response(line)
+            enem_feedback = regex_to_find_enem_feedback(line)
+            text_booklet_types = regex_to_find_test_booklet_types(line)
+            test_booklet_types_array = test_booklet_types.scan(/.{3}/)
+
+            language_choice = enem_feedback.slice!(0).to_i
+            enem_feedback.slice!(95 - (5 * language_choice), 5)
+            student_hits = 0
+
+            180.times do |i|
+              question = Question.where(number: i, year: test_year).take
+
+              if question.nil?
+                next
+              else
+                # nothing to do
+              end
+
+              if student_responses[i] == enem_feedback[i]
+                student_hits += 1
+                question.hits += 1
+              else
+                #nothing to do
+              end
+
+              question.tries += 1
+              question.save
+            end
+
+              create_candidate(student_hits)
+          end
           else
             # nothing to do
           end
-          student_responses = line[/(A|B|C|D|E|'*'){180}/, 0]
-          enem_feedback = line[/(0|1){1}(A|B|C|D|E){185}/, 0]
-          test_booklet_types = line[/[0-9]{13}(A|B|C|D|E){185}/, 0]
-          test_booklet_types_array = test_booklet_types.scan /.{3}/
-          language_choice = enem_feedback.slice!(0).to_i
-          enem_feedback.slice!(95 - (5 * language_choice), 5)
-          student_hits = 0
-          180.times do |i|
-            question = Question.where(number: i, year: test_year).take
-            if question.nil?
-              next
-            else
-              # nothing to do
-            end
-            if student_responses[i] == enem_feedback[i]
-              student_hits += 1
-              question.hits += 1
-            end
-            question.tries += 1
-            question.save
-          end
-          Candidate.create(general_average: (100 * student_hits.to_f / 180).round(2))
         end
       end
 
