@@ -29,6 +29,8 @@ module QuestionsHelper
       end
     end
 
+    NUMBER_OF_QUESTIONS_IN_A_EXAM = 180
+
       # name: read_candidates_data
       # explanation: method to create info about real student's performance in
       # questions.
@@ -64,8 +66,7 @@ module QuestionsHelper
               end
             end
 
-              create_candidate(student_hits)
-          end
+            create_candidate(student_hits)
           else
             # nothing to do
           end
@@ -126,6 +127,18 @@ module QuestionsHelper
         student_response = line[/(A|B|C|D|E|'*'){180}/, 0]
 
         return student_response
+      end
+
+      def regex_to_find_enem_feedback(line)
+        enem_feedback = line[/(0|1){1}(A|B|C|D|E){185}/, 0]
+
+        return enem_feedback
+      end
+
+      def regex_to_find_test_booklet_types(line)
+        test_booklet_types = line[/[0-9]{13}(A|B|C|D|E){185}/, 0]
+
+        return test_booklet_types
       end
     end
   end
