@@ -7,7 +7,6 @@
 # defined correctly
 
 module MedalsHelper
-
   EMPTY_ARRAY = []
 
   # name: check_medals
@@ -52,4 +51,3 @@ module MedalsHelper
   end
 
 end
-

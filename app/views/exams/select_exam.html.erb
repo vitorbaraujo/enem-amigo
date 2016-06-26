@@ -12,8 +12,8 @@
     <p> ou <p>
     <div id="select-year-exam"><h2 class="form-title">Escolha um ano</h2></div>
     <%= select_tag :year_exam, options_for_select((2009..2015).to_a.collect { |year_exam| year_exam.to_s }), class: 'form-control' %>
-    <%= submit_tag ('Responder Prova', class: 'btn btn-primary btn-sm') %>
-    
+    <%= submit_tag('Responder Prova', class: 'btn btn-primary btn-sm') %>
+
   <% end %>
 
 </center>

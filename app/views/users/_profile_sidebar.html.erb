@@ -7,13 +7,15 @@
 <div class="col-sm-3">
   <div class="profile-sidebar">
     <div class="profile-image">
-      <%= link_to(image_tag(
-        if current_user.profile_image_file_name.blank?
-          "profiles_images/default"))
-        else
-          current_user.profile_image.url, alt: "Profile image"), "/users/#{current_user.id}")
-        end %>
+
+        <% if current_user.profile_image_file_name.blank? %>
+          <%= link_to(image_tag("profiles_images/default")) %>
+        <% else %>
+          <%= link_to(image_tag(current_user.profile_image.url, alt: "Profile image"), "/users/#{current_user.id}") %>
+        <% end %>
+
     </div>
+
     <div class="profile-information">
       <p id="user-name"><%= current_user.name %></p>
       <p id="user-level"><strong>Nível:</strong> <%= current_user.level %></p>
@@ -22,6 +24,8 @@
       <%= link_to("Meu Desempenho", exams_statistics_path, class: 'btn btn-primary', id:'statistics') %>
       <a href="/medals" class="btn btn-success"><%= image_tag("star.png") %><span>Medalhas</span></a>
     </div>
+
     <%= render 'users/ranking' %>
+
   </div>
 </div>

@@ -13,10 +13,6 @@ footer a {
   color: white;
 }
 
-footer a:hover {
-  color: #222;
-}
-
 footer small {
   float: left;
   margin-top: 13px;

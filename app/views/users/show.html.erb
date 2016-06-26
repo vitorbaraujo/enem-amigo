@@ -4,7 +4,6 @@
  License : LGPL. No copyright.
 -->
 
-<% NONE = 0 %>
 
 <% if @user_level != current_user.level %>
     <%= render partial: 'users/new_level.html.erb' %>
@@ -72,7 +71,7 @@
     <%= @user.total_accepted_questions %>
   </p>
 
-  <% if @user.total_accepted_questions != NONE %>
+  <% if @user.total_accepted_questions != @NONE %>
     <table class = 'table'>
       <thead>
         <th>Número</th>

@@ -8,6 +8,7 @@
 
 class UsersController < ApplicationController
 
+  @NONE = 0
   before_action :authenticate_user, except: [:ranking, :new, :create]
   before_action :verify_user_permission, only: [:edit, :destroy]
 

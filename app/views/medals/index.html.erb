@@ -6,15 +6,14 @@
 
 <h1>Medalhas</h1>
 
-<% NONE = 0 %>
 
-<% if @new_medals.count > NONE %>
+<% if @new_medals.count > @NONE %>
   <%= render partial: 'new_medal' %>
 <% else %>
-  <!-- nothing to do -->
+  nothing to do
 <% end %>
 
-<% if current_user.medals.count > NONE %>
+<% if current_user.medals.count > @NONE %>
   <p>Medalhas Conquistadas</p>
 
   <div class="row">
@@ -36,7 +35,7 @@
   <!-- nothing to do -->
 <% end %>
 
-<% if @missing_medals.count > NONE %>
+<% if @missing_medals.count > @NONE %>
 
   <p>Outras Medalhas</p>
 

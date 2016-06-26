@@ -7,6 +7,9 @@
 # ranking, number of right questions, etc
 
 class User < ActiveRecord::Base
+  NONE = 0
+  BEGGINER = 30
+  INTERMEDIATE = 60
 
   has_many :active_battles, class_name: 'Battle', foreign_key: 'player_1_id'
   has_many :passive_battles, class_name: 'Battle', foreign_key: 'player_2_id'
@@ -177,9 +180,6 @@ class User < ActiveRecord::Base
     performance = self.average_performance area
     performance *= 100
 
-    NONE = 0
-    BEGGINER = 30
-    INTERMEDIATE = 60
 
     if performance >= NONE && performance <= BEGGINER
      return "beginner"

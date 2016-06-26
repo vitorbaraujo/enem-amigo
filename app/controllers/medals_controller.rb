@@ -4,6 +4,7 @@
 
 # This controller sets the behavior for showing medals a user does not have.
 
+
 class MedalsController < ApplicationController
 
   before_action :authenticate_user
@@ -13,14 +14,17 @@ class MedalsController < ApplicationController
   # parameters:
   # - none
   # return: medals a user doesn't have
+
+
   def index
+    @NONE = 0
     check_medals()
 
     assert(current_user.kind_of?(User))
 
     @missing_medals = @medals - current_user.medals
 
-    if @missing_medals != 0
+    if @missing_medals != @NONE
       @missing_medals.each do |medal|
         assert(medal.kind_of?(Medal))
       end
