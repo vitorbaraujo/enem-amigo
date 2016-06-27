@@ -80,6 +80,7 @@ users:
     medal: "Medals"  
     hello: "Hello world"
 
+
 pt:
   logged: "Logado com sucesso!"
   invalid: "Combinação'inválida de e-mail/senha"
@@ -110,9 +111,9 @@ pt:
     home:
       title: "Enem Amigo"
       progress: "Meu Progresso"
-      deion_questions: "Treine para o ENEM respondendo questões de provas anteriores!"
-      deion_battles: "Convide usuários ou seus amigos para uma disputa intelectual frenética com questões do ENEM!"
-      deion_exams: "Simule as condições de uma prova real do ENEM para melhorar seu desempenho!"
+      description_questions: "Treine para o ENEM respondendo questões de provas anteriores!"
+      description_battles: "Convide usuários ou seus amigos para uma disputa intelectual frenética com questões do ENEM!"
+      description_exams: "Simule as condições de uma prova real do ENEM para melhorar seu desempenho!"
 
   layouts:
     _header:
