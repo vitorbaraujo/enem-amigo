@@ -20,7 +20,40 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+static_pages:
+  home:
+    title: "Enem Amigo"
+    progress: "My progress"
+    deion_questions: "Train for ENEM answering questions from previous tests!"
+    deion_battles: "Invite users or your friends to a frenetic intellectual dispute with ENEM questions!"
+    deion_exams: "Simulate the conditions of a real ENEM exam to improve your performance!"
+
+layouts:
+  _header:
+    question: "Questions"
+    battle: "Battle"
+    exam: "Exam"
+    forum: "Forum"
+    begin: "Home"
+    users: "Users"
+    notifications: "Notifications"
+    seemore: "See more"
+    my_account: "My account"
+    edit_profile: "Edit my profile"
+    logout: "Log out"
+    register: "Sign up"
+  _footer:
+    help: "Help"
+    about: "About"
+
+users:
+  _profile_sidebar:
+    level: "Level"
+    position: "Position"
+    resolved: "Resolved"
+    score: "My score"
+    medal: "Medals"  
+    hello: "Hello world"
 
 pt:
   logged: "Logado com sucesso!"
