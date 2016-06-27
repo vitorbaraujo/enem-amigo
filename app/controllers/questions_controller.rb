@@ -44,7 +44,7 @@ class QuestionsController < ApplicationController
     assert(@questions.kind_of?(Question))
     check_update ||= @question.update_attributes(question_params)
     if check_update
-      flash[:success] = "Questão atualizada com sucesso!"
+      flash[:success] = t(:update_question)
       return redirect_to question_path
     else
       return render('edit')
@@ -71,7 +71,7 @@ class QuestionsController < ApplicationController
     @question ||= Question.find(params[:id])
     assert(@questions.kind_of?(Question))
     @question.destroy
-    flash[:success] = "Questão deletada com sucesso!"
+    flash[:success] = t(:delete_question)
     return redirect_to questions_path
   end
 
@@ -203,7 +203,7 @@ class QuestionsController < ApplicationController
       assert(file_content.nil? == false)
     Parser.read_questions(file_content)
 
-    flash[:success] = "Questões armazenadas com sucesso."
+    flash[:success] = t(:upload_message_question)
     return redirect_to questions_path
   end
 
@@ -225,7 +225,7 @@ class QuestionsController < ApplicationController
 
     Parser.read_candidates_data(file_content, params[:test_year])
 
-    flash[:success] = "Dados armazenados com sucesso."
+    flash[:success] = t(:upload_message_data)
     return redirect_to questions_path
   end
 

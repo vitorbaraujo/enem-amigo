@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     @user.destroy
-    flash[:success] = "Usuário foi deletado"
+    flash[:success] = t(:delete_user)
     return redirect_to(users_path)
   end
 
@@ -83,7 +83,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:success] = "Usuário criado com sucesso!"
+      flash[:success] = t(:create_user)
       log_in(@user)
       first_notification
       return redirect_to(root_path)
@@ -106,7 +106,7 @@ class UsersController < ApplicationController
     assert(@user.kind_of?(User))
 
     if @user.update_attributes(user_params)
-      flash[:success]= "Usuário atualizado"
+      flash[:success]= t(:update_user)
       return redirect_to(@user)
     else
       return render('edit')
@@ -146,9 +146,9 @@ class UsersController < ApplicationController
   def delete_profile_image
     if !current_user.profile_image_file_name.empty?
       current_user.update_attribute(:profile_image_file_name,"")
-      flash[:success] = "Foto de perfil removida com sucesso!"
+      flash[:success] = t(:delete_photo)
     else
-      flash[:danger] = "Não há foto de perfil para ser removida."
+      flash[:danger] = t(:error_delete_photo)
     end
     return redirect_to(user_path(current_user.id))
   end
