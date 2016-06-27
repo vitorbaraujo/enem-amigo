@@ -47,3 +47,37 @@ pt:
   update_user: "Usuário atualizado"
   deleted_photo: "Foto de perfil removida com sucesso!"
   error_delete_photo: "Não há foto de perfil para ser removida"
+  
+  static_pages:
+    home:
+      title: "Enem Amigo"
+      progress: "Meu Progresso"
+      deion_questions: "Treine para o ENEM respondendo questões de provas anteriores!"
+      deion_battles: "Convide usuários ou seus amigos para uma disputa intelectual frenética com questões do ENEM!"
+      deion_exams: "Simule as condições de uma prova real do ENEM para melhorar seu desempenho!"
+
+  layouts:
+    _header:
+      question: "Questões"
+      battle: "Batalha"
+      exam: "Prova"
+      forum: "Fórum"
+      begin: "Início"
+      users: "Usuários"
+      notifications: "Notificações"
+      seemore: "Ver mais"
+      my_account: "Minha conta"
+      edit_profile: "Editar minha conta"
+      logout: "Sair"
+      register: "Cadastre-se"
+    _footer:
+      help: "Ajuda"
+      about: "Sobre"
+
+  users:
+    _profile_sidebar:
+      level: "Nível"
+      position: "Posição"
+      resolved: "Resolvido"
+      score: "Meu desempenho"
+      medal: "Medalhas"
