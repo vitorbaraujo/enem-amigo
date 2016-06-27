@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     @post.topic_id = session[:topic_id]
 
     if @post.save
-      flash[:success] = "Postagem criada com sucesso"
+      flash[:success] = t(:create_post)
       redirect_to Topic.find(session[:topic_id])
     else
       render 'new'
@@ -93,7 +93,7 @@ class PostsController < ApplicationController
     assert(@post.kind_of?(Post))
 
     if @post.update_attributes(post_params)
-      flash[:success] = "Seu post foi atualizado com sucesso"
+      flash[:success] = t(:update_post)
       redirect_to Topic.find(session[:topic_id])
     else
       render 'edit'
@@ -146,7 +146,7 @@ class PostsController < ApplicationController
 
     @post.destroy
 
-    flash[:success] = "Post deletado com sucesso"
+    flash[:success] = t(:delete_post)
     redirect_to Topic.find(session[:topic_id])
   end
 

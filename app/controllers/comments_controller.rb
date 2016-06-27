@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
     assert(@comment.post_idkind_of?(Comment))
 
     if @comment.save
-      flash[:success] = "Seu comentário foi criado com sucesso"
+      flash[:success] = t(:created_comment)
       return redirect_to (Topic.find(session[:topic_id]))
     else
       return redirect_to (new_post_comment_path(params[:post_id]))
@@ -79,7 +79,7 @@ class CommentsController < ApplicationController
     assert(@comment.kind_of?(Comment))
 
     if @comment.update_attributes(comment_params)
-      flash[:success] = "Seu comentário foi atualizado com sucesso"
+      flash[:success] = t(:update_comment)
       return redirect_to (Topic.find(session[:topic_id]))
     else
       return redirect_to (edit_post_comment_path(session[:topic_id]))
@@ -122,7 +122,7 @@ class CommentsController < ApplicationController
 
     @comment.destroy
 
-    flash[:success] = "Comentário deletado com sucesso"
+    flash[:success] = t(:delete_comment)
 
     return redirect_to (Topic.find(session[:topic_id]))
   end

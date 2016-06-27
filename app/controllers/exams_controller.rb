@@ -46,9 +46,9 @@ class ExamsController < ApplicationController
     else
       redirect_to_back(select_exam_path)
       if params[:year_exam]
-        flash[:danger] = "Não há questões cadastradas do ano de #{params[:year_exam]}."
+        flash[:danger] = t(:year_exam_not_found)
       else
-        flash[:danger] = "Não há questões cadastradas."
+        flash[:danger] = t(:exam_not_found)
       end
     end
   end
@@ -71,7 +71,7 @@ class ExamsController < ApplicationController
       return @exam.user_answers
     else
       return redirect_to_back
-      flash[:danger] = "Você deve responder uma prova antes para obter seu resultado."
+      flash[:danger] = t(:exam_message)
     end
   end
 
