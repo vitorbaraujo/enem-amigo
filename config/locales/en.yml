@@ -20,6 +20,31 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  logged: "Sucessfully logged in"
+  invalid: "Invalid combination of e-mail/password"
+  update_question: "Sucessfully updated question!"
+  detele_question: "Sucessfully deleted question!"
+  upload_message_question: "Sucessfully uploaded questons!"
+  upload_message_data: "Sucessfully uploaded datas!"
+  invitation_battle: "Invitation has been sucessfully sent"
+  user_not_found: "User not found"
+  finish_battle: "Battle was sucessfully finished"
+  created_comment: "The comment was sucessfully created"
+  update_comment: "The comment was sucessfully updated"
+  delete_comment: "The comment was sucessfully deleted"
+  year_exam_not_found: "No registered questions of this years!"
+  exam_not_found: "No registered questions!"
+  exam_message: "You should answer an exam to see your result"
+  create_post: "Post was sucessfully created"
+  update_post: "Post was sucessfully updated"
+  deleted_post: "Post was sucessfully deleted"
+  create_topic: "Topic was sucessfully created"
+  delete_user: "User was sucessfully deleted"
+  create_user: "User was sucessfully created"
+  update_user: "User was sucessfully updated"
+  delete_photo: "Photo was sucessfully deleted"
+  error_delete_photo: "There isn't a photo to be deleted"
+
 static_pages:
   home:
     title: "Enem Amigo"
