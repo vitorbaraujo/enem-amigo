@@ -47,10 +47,10 @@ class BattlesController < ApplicationController
     if @battle.save
       new_battle_notification(@battle)
 
-      flash[:success] = "Convite enviado com sucesso!"
+      flash[:success] = t(:invitation_battle)
       redirect_to battles_path
     else
-      flash[:danger] = "Usuário não encontrado"
+      flash[:danger] = t(:user_not_found)
       render 'new'
     end
   end
@@ -171,7 +171,7 @@ class BattlesController < ApplicationController
 
     if question_position == battle.questions.count
       process_time(battle)
-      flash[:success] = "Batalha finalizada com sucesso!"
+      flash[:success] = t(:finish_battle)
       render :js => "window.location.href += '/finish'"
     else
       @question = battle.questions[question_position]
