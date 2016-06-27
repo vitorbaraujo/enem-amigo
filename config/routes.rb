@@ -86,6 +86,22 @@ Rails.application.routes.draw do
     get :read, on: :collection
   end
 
+  scope "(:locale)", locale: /en|nl/ do
+    resources :users
+    resources :battles
+    resources :posts
+    resources :comments
+    resources :battles
+    resources :altenatives
+    resources :candidates
+    resources :exams
+    resources :medals
+    resources :notifications
+    resources :questions
+    resources :texts
+    resources :topics
+  end
+
   get '*unmatched_route', :to => 'application#raise_not_found!'
 
 end

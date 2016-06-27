@@ -7,6 +7,21 @@ class ApplicationController < ActionController::Base
   include NotificationsHelper
   include UsersHelper
 
+  before_action :set_locale
+ 
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  def extract_locale_from_tld
+    parsed_locale = request.host.split('.').last
+    I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
+  end
+
+  def default_url_options(options = {})
+  { locale: I18n.locale }.merge options
+  end
+
   if ENV['RAILS_ENV'] == 'production' || ENV['RAILS_ENV'] == 'development'
     # rescue_from Exception, :with => :server_exception
     # rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
