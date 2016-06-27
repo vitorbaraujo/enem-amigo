@@ -18,11 +18,11 @@
 
     <div class="profile-information">
       <p id="user-name"><%= current_user.name %></p>
-      <p id="user-level"><strong>Nível:</strong> <%= current_user.level %></p>
-      <p id="user-rank"><strong>Posição:</strong> <%= current_user.find_position_in_ranking %>º</p>
-      <p><strong>Resolvido:</strong> <%= pluralize(current_user.total_accepted_questions, 'questão' ,'questões')%></p>
-      <%= link_to("Meu Desempenho", exams_statistics_path, class: 'btn btn-primary', id:'statistics') %>
-      <a href="/medals" class="btn btn-success"><%= image_tag("star.png") %><span>Medalhas</span></a>
+      <p id="user-level"><strong><%= t(:'users._profile_sidebar.level')%>: </strong> <%= current_user.level %></p>
+      <p id="user-rank"><strong><%= t(:'users._profile_sidebar.position')%>: </strong> <%= current_user.find_position_in_ranking %>º</p>
+      <p><strong><%= t(:'users._profile_sidebar.resolved')%>:</strong> <%= pluralize(current_user.total_accepted_questions, 'questão' ,'questões')%></p>
+      <%= link_to(t(:'users._profile_sidebar.score'), exams_statistics_path, class: 'btn btn-primary', id:'statistics') %>
+      <a href="/medals" class="btn btn-success"><%= image_tag("star.png") %><span><%= t(:'users._profile_sidebar.medal')%></span></a>
     </div>
 
     <%= render 'users/ranking' %>

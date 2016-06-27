@@ -39,7 +39,7 @@ class TopicsController < ApplicationController
     assert(@topic.kind_of?(Topic))
 
 		if @topic.save
-			flash[:success] = "Tópico criado com sucesso"
+			flash[:success] = t(:create_topic)
 			return redirect_to (@topic)
 		else
       #nothing to do
