@@ -38,6 +38,9 @@ gem 'paperclip', '~> 4.2'
 
 gem 'chartkick', '~> 1.4.1'
 
+gem 'rails-perftest'
+gem 'ruby-prof'
+
 group :test do
     gem 'simplecov', :require => false
     gem 'mocha', :require => false
