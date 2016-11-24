@@ -13,8 +13,6 @@ class Medal < ActiveRecord::Base
 
   validate :instructions_work
 
-  private
-
   def instructions_work
     current_user = User.create(name: "Joao", email: "joao@gmail.com", password: "12345678", nickname: "joaovitor")
     current_user.restore_attributes

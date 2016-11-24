@@ -39,7 +39,7 @@ gem 'paperclip', '~> 4.2'
 gem 'chartkick', '~> 1.4.1'
 
 gem 'rails-perftest'
-gem 'ruby-prof'
+gem 'ruby-prof', '~> 0.15.9'
 
 group :test do
     gem 'simplecov', :require => false
